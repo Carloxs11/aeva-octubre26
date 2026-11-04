@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grupo AEVA · Reporte Meta Ads · Octubre 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e1a;
+  --surface: #111827;
+  --surface2: #1a2235;
+  --border: rgba(255,255,255,0.07);
+  --accent: #7FECB7;
+  --accent2: #E3A836;
+  --text: #e8eaf0;
+  --muted: #6b7a9a;
+  --good: #10b981;
+  --warn: #f59e0b;
+  --bad: #ef4444;
+  --navy-mint: #7FECB7;
+  --gold: #E3A836;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid var(--border);background:rgba(10,14,26,0.95);position:sticky;top:0;z-index:100;backdrop-filter:blur(8px)}
+.topbar-logo{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;letter-spacing:0.02em}
+.topbar-logo span{color:var(--navy-mint)}
+.topbar-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+.topbar-badge{background:rgba(127,236,183,0.12);color:var(--navy-mint);border:1px solid rgba(127,236,183,0.25);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:500;letter-spacing:0.06em;white-space:nowrap}
+.topbar-client{font-size:12px;color:var(--muted)}
+
+.report-header{position:relative;padding:48px 24px 40px;border-bottom:1px solid var(--border);overflow:hidden}
+.report-header::before{content:'';position:absolute;top:-80px;right:-60px;width:400px;height:400px;background:radial-gradient(circle,rgba(127,236,183,0.10) 0%,transparent 70%);pointer-events:none}
+.report-header::after{content:'';position:absolute;bottom:-100px;left:60px;width:300px;height:300px;background:radial-gradient(circle,rgba(227,168,54,0.06) 0%,transparent 70%);pointer-events:none}
+.header-tag{display:inline-block;background:rgba(127,236,183,0.12);color:var(--navy-mint);border:1px solid rgba(127,236,183,0.25);border-radius:20px;padding:4px 14px;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px}
+.report-title{font-family:'Syne',sans-serif;font-size:clamp(28px,6vw,50px);font-weight:800;line-height:1.1;margin-bottom:8px}
+.report-title span{color:var(--navy-mint)}
+.report-subtitle{color:var(--muted);font-size:13px;font-weight:300;margin-bottom:28px}
+.header-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.meta-item{display:flex;flex-direction:column;gap:3px}
+.meta-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em}
+.meta-value{font-size:13px;font-weight:500}
+
+.section{padding:36px 24px;border-bottom:1px solid var(--border)}
+.section-title{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--navy-mint);margin-bottom:4px}
+.section-heading{font-family:'Syne',sans-serif;font-size:clamp(18px,4vw,26px);font-weight:700;margin-bottom:8px}
+.metric-explain{background:rgba(255,255,255,0.03);border-left:3px solid rgba(127,236,183,0.4);border-radius:0 8px 8px 0;padding:10px 14px;font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.5}
+.metric-explain strong{color:var(--text)}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin-bottom:20px}
+.kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;position:relative;overflow:hidden}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent-color,var(--accent))}
+.kpi-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px}
+.kpi-explain{font-size:9px;color:rgba(107,122,154,0.7);margin-bottom:6px;line-height:1.3;font-style:italic}
+.kpi-value{font-family:'Syne',sans-serif;font-size:clamp(20px,4vw,28px);font-weight:700;line-height:1}
+.kpi-sub{font-size:10px;color:var(--muted);margin-top:5px}
+.badge-new{background:rgba(127,236,183,0.18);color:var(--navy-mint);font-size:10px;padding:2px 8px;border-radius:10px;display:inline-block;margin-top:6px}
+.badge-warn{background:rgba(245,158,11,0.15);color:var(--warn);font-size:10px;padding:2px 8px;border-radius:10px;display:inline-block;margin-top:6px}
+.badge-good{background:rgba(16,185,129,0.15);color:var(--good);font-size:10px;padding:2px 8px;border-radius:10px;display:inline-block;margin-top:6px}
+.badge-bad{background:rgba(239,68,68,0.15);color:var(--bad);font-size:10px;padding:2px 8px;border-radius:10px;display:inline-block;margin-top:6px}
+
+.alert{display:flex;gap:12px;padding:16px;border-radius:12px;margin-top:14px;font-size:13px;line-height:1.5}
+.alert-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.alert-good{background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2)}
+.alert-warn{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2)}
+.alert-bad{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2)}
+.alert-mint{background:rgba(127,236,183,0.06);border:1px solid rgba(127,236,183,0.2)}
+.alert-info{background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.2)}
+
+.table-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:16px 0;border-radius:10px;border:1px solid var(--border)}
+.data-table{width:100%;border-collapse:collapse;min-width:560px}
+.data-table th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);padding:10px 12px;border-bottom:1px solid var(--border);white-space:nowrap;background:var(--surface)}
+.data-table td{padding:11px 12px;border-bottom:1px solid var(--border);font-size:12px}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:rgba(255,255,255,0.02)}
+.data-table .num{text-align:right;font-variant-numeric:tabular-nums;font-family:'Syne',sans-serif;font-size:12px}
+.tag{display:inline-block;padding:2px 8px;border-radius:20px;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em}
+.tag-tofu{background:rgba(127,236,183,0.15);color:var(--navy-mint)}
+.tag-zona{background:rgba(227,168,54,0.15);color:var(--gold)}
+.tag-rtg{background:rgba(124,58,237,0.15);color:#a78bfa}
+
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.bar-label{font-size:11px;width:200px;flex-shrink:0;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-track{flex:1;height:8px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px}
+.bar-fill-mint{background:var(--navy-mint)}
+.bar-fill-gold{background:var(--gold)}
+.bar-fill-purple{background:#a78bfa}
+.bar-fill-bad{background:var(--bad)}
+.bar-val{font-size:11px;font-family:'Syne',sans-serif;font-weight:600;width:80px;text-align:right;color:var(--muted)}
+
+.two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:16px}
+.three-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px}
+.card-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.card-accent{width:3px;height:16px;border-radius:2px;background:var(--navy-mint);flex-shrink:0}
+
+.dest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:8px}
+.dest-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px;position:relative;overflow:hidden}
+.dest-card-accent{position:absolute;top:0;left:0;right:0;height:3px}
+.dest-card-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.dest-pct{font-size:11px;color:var(--muted);margin-bottom:14px}
+.dest-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.dest-metric-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:3px}
+.dest-metric-val{font-family:'Syne',sans-serif;font-size:16px;font-weight:700}
+
+.persona-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:16px}
+.persona-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;position:relative;overflow:hidden}
+.persona-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--pc-color,var(--accent))}
+.persona-rank{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;color:var(--pc-color,var(--accent))}
+.persona-seg{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:10px}
+.persona-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.pm-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px}
+.pm-val{font-family:'Syne',sans-serif;font-size:14px;font-weight:700}
+
+
+
+.ad-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:12px}
+.ad-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;position:relative}
+.ad-rank{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
+.ad-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:4px;line-height:1.3}
+.ad-meta{font-size:11px;color:var(--muted);margin-bottom:12px}
+.ad-adset{font-size:10px;color:var(--muted);margin-bottom:12px}
+.ad-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding-top:12px;border-top:1px solid var(--border)}
+.am-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:2px}
+.am-val{font-family:'Syne',sans-serif;font-size:13px;font-weight:700}
+
+/* FUNNEL */
+.funnel-step{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.funnel-label{font-size:12px;width:180px;flex-shrink:0;color:var(--text)}
+.funnel-sublabel{font-size:10px;color:var(--muted);display:block}
+.funnel-bar-wrap{flex:1}
+.funnel-bar{height:30px;border-radius:6px;display:flex;align-items:center;padding:0 12px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;min-width:40px}
+.funnel-pct{font-size:12px;font-weight:700;width:60px;text-align:right;flex-shrink:0;font-family:'Syne',sans-serif}
+.funnel-count{font-size:10px;color:var(--muted);width:70px;text-align:right;flex-shrink:0}
+
+.change-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
+.change-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.change-content{flex:1}
+.change-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px}
+.change-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:4px}
+.change-desc{font-size:12px;color:var(--muted);line-height:1.4}
+
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:8px}
+.step-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px}
+.step-priority{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px}
+.priority-urgent{color:var(--bad)}
+.priority-important{color:var(--warn)}
+.priority-mid{color:#a78bfa}
+.step-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:8px}
+.step-body{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:10px}
+.step-list{list-style:none;padding:0}
+.step-list li{font-size:12px;padding:4px 0;padding-left:16px;position:relative;line-height:1.4;color:var(--muted)}
+.step-list li::before{content:'→';position:absolute;left:0;color:var(--navy-mint);font-size:10px;top:5px}
+
+.conclusion-body{font-size:14px;line-height:1.8;color:var(--text)}
+.conclusion-body p{margin-bottom:18px}
+.conclusion-body strong{color:var(--navy-mint);font-weight:600}
+.conclusion-highlight{background:rgba(127,236,183,0.06);border:1px solid rgba(127,236,183,0.2);border-radius:12px;padding:16px;margin-top:16px}
+.conclusion-highlight-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--navy-mint);margin-bottom:10px}
+.foco-list{list-style:none;padding:0}
+.foco-list li{font-size:13px;padding:8px 0;padding-left:20px;position:relative;border-bottom:1px solid var(--border);line-height:1.5}
+.foco-list li:last-child{border-bottom:none}
+.foco-list li::before{content:'◆';position:absolute;left:0;color:var(--navy-mint);font-size:8px;top:12px}
+
+.report-footer{padding:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;background:var(--surface);border-top:1px solid var(--border);font-size:11px;color:var(--muted)}
+.footer-brand{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--navy-mint)}
+.sub-heading{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin:24px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+</style><style>
+.vfunnel{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;margin:12px 0}
+.vf-row{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.vf-lab{flex:0 0 92px}
+.vf-track{flex:1 1 auto}
+.vf-val{flex:0 0 62px}
+.vf-lab{font-size:11px;color:var(--muted);text-align:right}
+.vf-track{background:rgba(255,255,255,0.05);border-radius:4px;height:20px;overflow:hidden}
+.vf-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:7px;font-size:10px;font-weight:600;color:var(--bg)}
+.vf-val{font-size:11px;font-weight:600;text-align:right;font-family:'Syne',sans-serif}
+.vcard{background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--accent-color,var(--navy-mint));border-radius:10px;padding:14px 16px;margin-bottom:12px}
+.vcard-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;margin-bottom:8px}
+.vcard-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text)}
+.vcard-meta{font-size:11px;color:var(--muted);margin-top:2px}
+.vcard-kpis{display:flex;gap:14px;flex-wrap:wrap}
+.vk{text-align:right;margin-left:16px}
+.vcard-kpis>.vk:first-child{margin-left:0}
+.vk-l{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.vk-v{font-family:'Syne',sans-serif;font-size:15px;font-weight:700}
+.vret{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.vr-c{flex:1 1 90px}
+.vr-c{background:rgba(255,255,255,0.03);border-radius:6px;padding:6px 4px;text-align:center}
+.vr-l{font-size:9px;color:var(--muted)}
+.vr-v{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-top:2px}
+.vcard-read{font-size:12px;color:var(--muted);line-height:1.55;margin-top:10px;padding-top:9px;border-top:1px solid var(--border)}
+.vs-grid{display:flex;flex-wrap:wrap;gap:12px;margin:14px 0}
+.vs-box{flex:1 1 300px}
+@media(max-width:700px){.vs-grid{grid-template-columns:1fr}.vret{grid-template-columns:repeat(3,1fr)}}
+.vs-box{border-radius:10px;padding:14px 16px;border:1px solid var(--border)}
+.vs-t{font-size:10px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}
+.vs-n{font-family:'Syne',sans-serif;font-size:26px;font-weight:700}
+.vs-s{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5}
+.recipe{background:linear-gradient(135deg,rgba(127,236,183,0.07),rgba(167,139,250,0.05));border:1px solid rgba(127,236,183,0.2);border-radius:12px;padding:18px 20px;margin-top:16px}
+.recipe-t{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--navy-mint);margin-bottom:10px}
+.recipe ol{margin:0;padding-left:18px}
+.recipe li{font-size:13px;color:var(--text);line-height:1.6;margin-bottom:7px}
+.recipe li strong{color:var(--navy-mint)}
+</style><style>
+.fixbox{background:linear-gradient(135deg,rgba(16,185,129,0.10),rgba(96,165,250,0.06));border:1px solid rgba(16,185,129,0.3);border-radius:12px;padding:20px 22px;margin:16px 0}
+.fixbox-t{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--good);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.tl{margin:14px 0 4px;border-left:2px solid rgba(255,255,255,0.12);padding-left:16px}
+.tl-i{position:relative;padding-bottom:13px}
+.tl-i:last-child{padding-bottom:0}
+.tl-i::before{content:'';position:absolute;left:-21px;top:4px;width:9px;height:9px;border-radius:50%;background:var(--accent-c,var(--navy-mint));border:2px solid var(--bg)}
+.tl-d{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}
+.tl-x{font-size:12.5px;color:var(--text);line-height:1.55;margin-top:2px}
+.cmp{display:flex;flex-wrap:wrap;gap:12px;margin:14px 0}
+.cmp-b{flex:1 1 230px;border-radius:10px;padding:14px 16px;border:1px solid var(--border)}
+.cmp-l{font-size:10px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}
+.cmp-n{font-family:'Syne',sans-serif;font-size:27px;font-weight:700}
+.cmp-s{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="topbar-logo">NAVY<span>MKT</span></div>
+  <div class="topbar-right">
+    <span class="topbar-client">Grupo AEVA Inmobiliaria</span>
+    <span class="topbar-badge">Octubre 2026</span>
+    <span class="topbar-badge" style="background:rgba(227,168,54,0.12);color:var(--gold);border-color:rgba(227,168,54,0.25)">Meta Ads</span>
+  </div>
+</nav>
+
+<header class="report-header">
+  <div class="header-tag">📊 Reporte Mensual · Sexto Ciclo</div>
+  <h1 class="report-title">Grupo <span>AEVA</span><br>Inmobiliaria</h1>
+  <p class="report-subtitle">Análisis completo de Meta Ads · Octubre 2026 · Elaborado por Navy Marketing</p>
+  <div class="header-meta">
+    <div class="meta-item"><span class="meta-label">Periodo</span><span class="meta-value">01 – 31 octubre 2026</span></div>
+    <div class="meta-item"><span class="meta-label">Objetivo</span><span class="meta-value">Mensajes WhatsApp</span></div>
+    <div class="meta-item"><span class="meta-label">Moneda</span><span class="meta-value">MXN (pesos mexicanos)</span></div>
+    <div class="meta-item"><span class="meta-label">Campañas</span><span class="meta-value">5 activas todo el mes</span></div>
+    <div class="meta-item"><span class="meta-label">Comparativa</span><span class="meta-value">vs Septiembre 2026</span></div>
+    <div class="meta-item"><span class="meta-label">Elaborado por</span><span class="meta-value">Navy Marketing</span></div>
+  </div>
+</header>
+
+<!-- ===== SECCIÓN 01 ===== -->
+<section class="section">
+  <p class="section-title">01</p>
+  <h2 class="section-heading">Resumen Ejecutivo</h2>
+  <div class="metric-explain">
+    <strong>¿Qué estamos midiendo?</strong> Los números más importantes de octubre comparados con septiembre (Δ%). Octubre marca el <strong>récord de volumen de la cuenta</strong> y, sobre todo, es el mes en el que <strong>hemos corregido un error de medición</strong> que venía distorsionando las cifras. Eso último es lo más importante del reporte y lo explicamos a fondo en la sección 02.
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card" style="--accent-color:var(--gold)">
+      <div class="kpi-label">Gasto Total</div>
+      <div class="kpi-explain">Cuánto se invirtió en publicidad en Meta durante octubre</div>
+      <div class="kpi-value">$38,040</div>
+      <div class="kpi-sub">MXN · 5 campañas · 31 días</div>
+      <span class="badge-warn">Δ +30.1% vs septiembre</span>
+    </div>
+    <div class="kpi-card" style="--accent-color:#a78bfa">
+      <div class="kpi-label">Impresiones</div>
+      <div class="kpi-explain">Cuántas veces se mostró algún anuncio de AEVA</div>
+      <div class="kpi-value">668,392</div>
+      <div class="kpi-sub">veces mostrado el anuncio</div>
+      <span class="badge-good">Δ +25.9% vs septiembre</span>
+    </div>
+    <div class="kpi-card" style="--accent-color:var(--good)">
+      <div class="kpi-label">Alcance Único</div>
+      <div class="kpi-explain">Cuántas personas distintas vieron al menos un anuncio</div>
+      <div class="kpi-value">366,375</div>
+      <div class="kpi-sub">personas únicas impactadas</div>
+      <span class="badge-good">Δ +56.5% vs septiembre</span>
+    </div>
+    <div class="kpi-card" style="--accent-color:var(--gold)">
+      <div class="kpi-label">CPM</div>
+      <div class="kpi-explain">Coste por cada 1,000 veces que se muestra el anuncio</div>
+      <div class="kpi-value">$56.91</div>
+      <div class="kpi-sub">MXN por cada 1,000 impresiones</div>
+      <span class="badge-warn">Δ +3.2% vs septiembre</span>
+    </div>
+    <div class="kpi-card" style="--accent-color:var(--good)">
+      <div class="kpi-label">CTR (Tasa de clic)</div>
+      <div class="kpi-explain">De cada 100 personas que ven el anuncio, cuántas hacen clic. Mide si el anuncio engancha</div>
+      <div class="kpi-value">2.111%</div>
+      <div class="kpi-sub">de cada 100 personas que lo ven, hacen clic</div>
+      <span class="badge-good">Δ +17.8% vs septiembre</span>
+    </div>
+    <div class="kpi-card" style="--accent-color:var(--good)">
+      <div class="kpi-label">Conversaciones Iniciadas</div>
+      <div class="kpi-explain">Personas que enviaron el primer mensaje a AEVA por WhatsApp gracias a los anuncios</div>
+      <div class="kpi-value">1,390</div>
+      <div class="kpi-sub">mensajes WhatsApp iniciados en octubre</div>
+      <span class="badge-good">Δ +26.0% vs septiembre</span>
+    </div>
+    <div class="kpi-card" style="--accent-color:var(--warn)">
+      <div class="kpi-label">CPL (Coste por Lead)</div>
+      <div class="kpi-explain">Cuánto costó que una persona escribiera a WhatsApp. Es el KPI más importante</div>
+      <div class="kpi-value">$27.37</div>
+      <div class="kpi-sub">MXN por conversación · ver matiz en sección 02</div>
+      <span class="badge-warn">Δ +3.2% vs septiembre</span>
+    </div>
+    <div class="kpi-card" style="--accent-color:#60a5fa">
+      <div class="kpi-label">CPL corregido del mes</div>
+      <div class="kpi-explain">El mismo mes, descontando el conjunto de anuncios que contaba de más</div>
+      <div class="kpi-value">$42.68</div>
+      <div class="kpi-sub">681 conversaciones con $29,062 · es la cifra real de octubre</div>
+      <span class="badge-bad">Dato corregido · sección 02</span>
+    </div>
+  </div>
+
+  <div class="alert alert-good">
+    <span class="alert-icon">🏆</span>
+    <div><strong>Récord de volumen: 1,390 conversaciones.</strong> Se invirtió un 30.1% más y se consiguieron <strong>287 conversaciones más</strong> que en septiembre, con el <strong>mayor alcance de la historia de la cuenta (366,375 personas, +56.5%)</strong> y el <strong>CTR más alto registrado (2.111%)</strong>. En términos de capacidad de llegar a gente nueva y de enganchar, octubre es el mejor mes.</div>
+  </div>
+  <div class="alert alert-mint">
+    <span class="alert-icon">🔧</span>
+    <div><strong>Hemos detectado y corregido un error de medición.</strong> Un activo de la campaña SIMPLIFICADA estaba <strong>duplicando el registro de inicios de conversación</strong>. Lo hemos resuelto <strong>creando conjuntos de anuncios nuevos y apagando el que tenía el problema</strong>, y el error ya ha desaparecido de la cuenta. Es una buena noticia — ahora medimos bien — pero cambia la lectura de las cifras: lo explicamos con detalle y con números en la <strong>sección 02</strong>, porque afecta a cómo hay que leer este mes y los anteriores.</div>
+  </div>
+  <div class="alert alert-warn">
+    <span class="alert-icon">⚠️</span>
+    <div><strong>Lo que hay que vigilar en noviembre.</strong> Descontando el conjunto afectado, el coste real por conversación de octubre es de <strong>$42.68</strong>, no los $27 que marca el promedio sin corregir. El <strong>retargeting de Guadalajara se ha encarecido a $57.09</strong> (desde $43.62) con un CTR del 0.445%, y el <strong>retargeting de Monterrey sigue saturado</strong> (frecuencia 3.12×, CPL $72.27) — es el tercer mes consecutivo que lo señalamos. Son los dos frentes a corregir.</div>
+  </div>
+</section>
+
+<!-- ===== SECCIÓN 02 — LA CLAVE DEL MES ===== -->
+<section class="section">
+  <p class="section-title">02</p>
+  <h2 class="section-heading">Corrección del Error de Medición</h2>
+  <div class="metric-explain">
+    <strong>Por qué esta sección va antes que ninguna otra.</strong> Durante octubre detectamos que uno de los conjuntos de anuncios estaba registrando <strong>más inicios de conversación de los que realmente ocurrían</strong>. Ya está solucionado. Pero como ese activo concentraba buena parte de los resultados, conviene entender qué significa para los números que hemos venido viendo.
+  </div>
+
+  <div class="fixbox">
+    <div class="fixbox-t">✅ Qué ha pasado y cómo se ha resuelto</div>
+    <div class="tl">
+      <div class="tl-i" style="--accent-c:var(--warn)">
+        <div class="tl-d">1 – 20 de octubre</div>
+        <div class="tl-x">El conjunto de anuncios <strong>INTERESES_BROAD_05 v2</strong> (campaña SIMPLIFICADA) venía funcionando con un coste por conversación llamativamente bajo: <strong>$12.66</strong>, cuando el resto de la cuenta se movía entre $26 y $86.</div>
+      </div>
+      <div class="tl-i" style="--accent-c:var(--gold)">
+        <div class="tl-d">21 de octubre — detección</div>
+        <div class="tl-x">Se aísla el problema y se lanzan en paralelo <strong>conjuntos de anuncios nuevos y limpios</strong> (INTERESES_BROAD_02 v2 — "nueva") para comparar en igualdad de condiciones.</div>
+      </div>
+      <div class="tl-i" style="--accent-c:var(--good)">
+        <div class="tl-d">26 de octubre — corrección</div>
+        <div class="tl-x">Se <strong>apaga definitivamente</strong> el conjunto afectado y se añaden dos conjuntos limpios más ("nueva 2" y "nueva 3"). <strong>El error desaparece de la cuenta.</strong></div>
+      </div>
+      <div class="tl-i" style="--accent-c:var(--navy-mint)">
+        <div class="tl-d">27 – 31 de octubre</div>
+        <div class="tl-x">La cuenta opera ya <strong>solo con medición correcta</strong>. Son días de transición —conjuntos nuevos en aprendizaje y creativos recién rotados—, así que para valorar el mes la referencia es octubre entero descontando el conjunto afectado, no estos cinco días.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-heading">Qué peso tenía el conjunto afectado</div>
+  <div class="cmp">
+    <div class="cmp-b" style="background:rgba(245,158,11,0.07);border-color:rgba(245,158,11,0.3)">
+      <div class="cmp-l" style="color:var(--warn)">1 · El conjunto afectado (se descarta)</div>
+      <div class="cmp-n" style="color:var(--warn)">51.0%</div>
+      <div class="cmp-s">de las conversaciones del mes (709 de 1,390)<br>con solo el <strong>23.6% del gasto</strong> ($8,979)<br>CPL aparente: <strong>$12.66</strong></div>
+    </div>
+    <div class="cmp-b" style="background:rgba(96,165,250,0.09);border-color:rgba(96,165,250,0.45)">
+      <div class="cmp-l" style="color:#60a5fa">2 · Octubre corregido ← la cifra del mes</div>
+      <div class="cmp-n" style="color:#60a5fa">$42.68</div>
+      <div class="cmp-s"><strong>681 conversaciones con $29,062</strong><br>Es octubre entero, descontando solo ese conjunto<br><strong>Este es el CPL real del mes</strong></div>
+    </div>
+    <div class="cmp-b" style="background:rgba(255,255,255,0.03);border-color:var(--border)">
+      <div class="cmp-l" style="color:var(--muted)">Dato de contexto · últimos 5 días</div>
+      <div class="cmp-n" style="color:var(--muted)">$49.99</div>
+      <div class="cmp-s">142 conversaciones con $7,098<br><strong>No es la referencia</strong>: son 5 días con los conjuntos nuevos en aprendizaje y media tanda de creativos recién rotada</div>
+    </div>
+  </div>
+
+  <div class="sub-heading" style="margin-top:20px">La evidencia, paso a paso</div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr><th>Periodo</th><th class="num">Días</th><th class="num">Gasto MXN</th><th class="num">Conversac.</th><th class="num">CPL</th><th class="num">CTR</th><th>Situación</th></tr>
+      </thead>
+      <tbody>
+        <tr style="background:rgba(245,158,11,0.04)"><td><strong>1 – 20 octubre</strong></td><td class="num">20</td><td class="num">$24,025</td><td class="num">1,069</td><td class="num" style="color:var(--warn)">$22.47</td><td class="num">2.539%</td><td><small style="color:var(--muted)">Conjunto afectado funcionando</small></td></tr>
+        <tr><td><strong>21 – 26 octubre</strong></td><td class="num">6</td><td class="num">$6,917</td><td class="num">179</td><td class="num">$38.64</td><td class="num">1.020%</td><td><small style="color:var(--muted)">Transición: conviven ambos</small></td></tr>
+        <tr style="background:rgba(16,185,129,0.05)"><td><strong>27 – 31 octubre</strong></td><td class="num">5</td><td class="num">$7,098</td><td class="num">142</td><td class="num">$49.99</td><td class="num">0.921%</td><td><small style="color:var(--good)">Solo conjuntos limpios, en aprendizaje</small></td></tr>
+        <tr style="background:rgba(96,165,250,0.08)"><td><strong>Octubre corregido</strong><br><small style="color:var(--muted)">el mes entero sin el conjunto afectado</small></td><td class="num">31</td><td class="num">$29,062</td><td class="num">681</td><td class="num" style="color:#60a5fa"><strong>$42.68</strong></td><td class="num">0.655%</td><td><small style="color:#60a5fa"><strong>La cifra de referencia del mes</strong></small></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-info" style="margin-top:10px">
+    <span class="alert-icon">🔍</span>
+    <div><strong>El indicador que lo delata.</strong> Si miramos cuántos de los que hacen clic acaban escribiendo, el conjunto afectado se sale del patrón de forma evidente: registraba <strong>11,048 clics para 709 conversaciones</strong>, una proporción muy distinta a la del resto de la cuenta. Para comparar:
+      <div class="table-wrap" style="margin-top:10px">
+        <table class="data-table">
+          <thead><tr><th>Conjunto de anuncios</th><th class="num">Clics</th><th class="num">Conversac.</th><th class="num">Conversa por clic</th><th class="num">CPL</th></tr></thead>
+          <tbody>
+            <tr style="background:rgba(245,158,11,0.05)"><td><strong>INTERESES_BROAD_05 v2</strong> (afectado)</td><td class="num">11,048</td><td class="num">709</td><td class="num" style="color:var(--warn)">6.4%</td><td class="num" style="color:var(--warn)">$12.66</td></tr>
+            <tr style="background:rgba(16,185,129,0.04)"><td>INTERESES_BROAD_02 v2 — nueva (limpio)</td><td class="num">532</td><td class="num">112</td><td class="num" style="color:var(--good)">21.1%</td><td class="num">$46.27</td></tr>
+            <tr><td>MTY / TOFU / Intereses – Crédito</td><td class="num">344</td><td class="num">123</td><td class="num">35.8%</td><td class="num">$26.19</td></tr>
+            <tr><td>TOPMIX_LAL1_BROAD – Copia</td><td class="num">378</td><td class="num">80</td><td class="num">21.2%</td><td class="num">$37.52</td></tr>
+            <tr><td>MOFU_BROAD_BROAD (retargeting)</td><td class="num">861</td><td class="num">134</td><td class="num">15.6%</td><td class="num">$57.09</td></tr>
+          </tbody>
+        </table>
+      </div>
+      Todos los conjuntos limpios se mueven entre el 15% y el 36%; el afectado está en el 6.4%. <strong>Ese desajuste es precisamente la huella del problema de registro, y desaparece en cuanto el conjunto se apaga.</strong>
+    </div>
+  </div>
+
+  <div class="alert alert-warn" style="margin-top:8px">
+    <span class="alert-icon">📌</span>
+    <div><strong>Qué significa esto en la práctica — dicho con claridad.</strong> La corrección es sencilla: <strong>se descarta ese conjunto de anuncios del cómputo y ya está</strong>. Hecho eso, octubre cierra con <strong>681 conversaciones a $42.68</strong>, y esa es la cifra que hay que usar. No es que el rendimiento haya empeorado: es que <strong>ahora lo estamos midiendo bien</strong>. Lo que no sirve como referencia es el dato de los últimos cinco días ($49.99): ahí se mezclan tres cosas a la vez — la medición corregida, los conjuntos nuevos en <strong>fase de aprendizaje</strong> (Meta necesita entre 7 y 14 días para optimizar) y la rotación de media tanda de creativos del 24 al 26 de octubre. <strong>La referencia para noviembre es $42.68, y los meses anteriores no son directamente comparables porque arrastran el mismo problema sin corregir.</strong></div>
+  </div>
+  <div class="alert alert-good" style="margin-top:8px">
+    <span class="alert-icon">✅</span>
+    <div><strong>Lo importante: el problema está resuelto y la cuenta mide bien.</strong> A partir de ahora todas las decisiones de presupuesto se toman sobre datos fiables, que es exactamente lo que hace falta para escalar con criterio. Y conviene no perder de vista lo que <strong>no</strong> depende de este ajuste: el <strong>alcance (+56.5%)</strong> y la <strong>retención de los vídeos</strong> se miden de forma independiente del problema, y las dos han mejorado este mes.</div>
+  </div>
+</section>
+
+<!-- ===== SECCIÓN 03 ===== -->
+<section class="section">
+  <p class="section-title">03</p>
+  <h2 class="section-heading">Inversión y Distribución del Presupuesto</h2>
+  <div class="metric-explain">
+    <strong>¿Qué vemos aquí?</strong> Cómo se repartieron los $38,040 entre las cinco campañas y cómo evolucionó el coste por conversación a lo largo del mes. La curva diaria es la que mejor muestra el efecto de la corrección de medición del 21 y 26 de octubre.
+  </div>
+
+  <div class="sub-heading">3a — Reparto del presupuesto por campaña</div>
+  <div class="bar-row"><div class="bar-label">SIMPLIFICADA · TOFU</div><div class="bar-track"><div class="bar-fill bar-fill-mint" style="width:100%">$14,514 · 38.2%</div></div><div class="bar-val">833 conv</div></div>
+  <div class="bar-row"><div class="bar-label">MTY TOFU · Monterrey</div><div class="bar-track"><div class="bar-fill bar-fill-gold" style="width:63.7%">$9,243 · 24.3%</div></div><div class="bar-val">290 conv</div></div>
+  <div class="bar-row"><div class="bar-label">RTG ZMG · Retargeting</div><div class="bar-track"><div class="bar-fill bar-fill-purple" style="width:52.7%">$7,650 · 20.1%</div></div><div class="bar-val">134 conv</div></div>
+  <div class="bar-row"><div class="bar-label">SIMILARES · TOFU</div><div class="bar-track"><div class="bar-fill bar-fill-mint" style="width:24.8%">$3,598 · 9.5%</div></div><div class="bar-val">91 conv</div></div>
+  <div class="bar-row"><div class="bar-label">MTY MOFU · Retarg. Monterrey</div><div class="bar-track"><div class="bar-fill bar-fill-bad" style="width:20.9%">$3,035 · 8.0%</div></div><div class="bar-val">42 conv</div></div>
+
+  <div class="alert alert-info">
+    <span class="alert-icon">💰</span>
+    <div><strong>El crecimiento del mes se ha concentrado en los dos frentes de captación fría.</strong> La SIMPLIFICADA sube de $9,952 a $14,514 (<strong>+45.8%</strong>) y Monterrey TOFU de $5,882 a $9,243 (<strong>+57.1%</strong>). Las dos de retargeting se han mantenido casi planas (RTG ZMG +3.2%, MTY MOFU +0.5%), que es lo correcto: son audiencias pequeñas y no admiten más presupuesto sin quemarse. El 71.9% del presupuesto fue a captación nueva (TOFU) y el 28.1% a retargeting.</div>
+  </div>
+
+  <div class="sub-heading" style="margin-top:24px">3b — Evolución semanal: el momento exacto del cambio</div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Semana</th><th class="num">Gasto MXN</th><th class="num">Conversac.</th><th class="num">CPL</th><th class="num">CTR</th><th>Qué pasaba</th></tr></thead>
+      <tbody>
+        <tr><td>1 – 7 oct</td><td class="num">$8,501</td><td class="num">368</td><td class="num" style="color:var(--good)">$23.10</td><td class="num">2.069%</td><td><small style="color:var(--muted)">Cuenta en régimen normal</small></td></tr>
+        <tr><td>8 – 14 oct</td><td class="num">$8,266</td><td class="num">406</td><td class="num" style="color:var(--good)">$20.36</td><td class="num">2.444%</td><td><small style="color:var(--muted)">Mejor semana aparente del mes</small></td></tr>
+        <tr><td>15 – 21 oct</td><td class="num">$8,818</td><td class="num">345</td><td class="num">$25.56</td><td class="num">3.047%</td><td><small style="color:var(--gold)">Se detecta la anomalía (21 oct)</small></td></tr>
+        <tr><td>22 – 28 oct</td><td class="num">$8,816</td><td class="num">198</td><td class="num" style="color:var(--warn)">$44.53</td><td class="num">0.902%</td><td><small style="color:var(--warn)">Se apaga el conjunto afectado (26 oct)</small></td></tr>
+        <tr style="background:rgba(16,185,129,0.05)"><td>29 – 31 oct</td><td class="num">$3,640</td><td class="num">73</td><td class="num" style="color:var(--good)"><strong>$49.86</strong></td><td class="num">0.890%</td><td><small style="color:var(--good)">Medición ya limpia</small></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="alert alert-mint">
+    <span class="alert-icon">📈</span>
+    <div><strong>Cómo leer esta tabla sin sacar la conclusión equivocada.</strong> A simple vista parece que el rendimiento se ha desplomado a la mitad del mes. No es así: <strong>lo que cambió el 26 de octubre fue la forma de contar, no la forma de funcionar</strong>. Las semanas 1 a 3 llevaban conversaciones contadas de más; las semanas 4 y 5 llevan las conversaciones reales. La comparación honesta no es "$20 frente a $50": es que el mes entero, descontando ese conjunto, cierra en <strong>$42.68</strong>. Y el CTR sigue la misma lógica: el 3.047% de la semana 3 incluye los clics del conjunto afectado.</div>
+  </div>
+
+  <div class="sub-heading" style="margin-top:24px">3c — Días destacados</div>
+  <div class="three-col">
+    <div class="card">
+      <div class="card-title"><div class="card-accent" style="background:var(--good)"></div>Mayor volumen</div>
+      <div style="font-size:12.5px;color:var(--text);line-height:1.7">
+        <strong>12 de octubre — 83 conversaciones</strong> con $1,443 (CPL $17.39). Es el pico del mes en volumen, aunque está dentro del tramo con medición afectada.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="card-accent" style="background:var(--gold)"></div>Mayor inversión</div>
+      <div style="font-size:12.5px;color:var(--text);line-height:1.7">
+        <strong>27 de octubre — $1,990</strong> y 43 conversaciones ($46.29). Primer día con todo el presupuesto ya en conjuntos limpios.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="card-accent" style="background:#60a5fa"></div>Cierre de mes
+      </div>
+      <div style="font-size:12.5px;color:var(--text);line-height:1.7">
+        <strong>31 de octubre — $1,209 y 19 conversaciones</strong> ($63.65). Es el día más caro, con los conjuntos nuevos todavía en aprendizaje.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECCIÓN 04 ===== -->
+<section class="section">
+  <p class="section-title">04</p>
+  <h2 class="section-heading">Análisis por Campaña — Δ% vs Septiembre</h2>
+  <div class="metric-explain">
+    <strong>¿Qué vemos aquí?</strong> El rendimiento de cada campaña comparado con septiembre. Las cinco estuvieron activas el mes completo, así que la comparación de estructura es limpia. Hay que tener presente que el CPL de la SIMPLIFICADA está afectado por el problema de medición de la sección 02.
+  </div>
+
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr><th>Campaña</th><th>Tipo</th><th class="num">Gasto MXN</th><th class="num">Conversac.</th><th class="num">CPL oct.</th><th class="num">CPL sept.</th><th class="num">Δ CPL</th><th>Lectura</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>(SIMPLIFICADA) TOFU_..._0626</td><td><span class="tag tag-tofu">TOFU</span></td>
+          <td class="num">$14,514</td><td class="num">833</td>
+          <td class="num" style="color:var(--warn)">$17.42</td><td class="num">$15.19</td><td class="num" style="color:var(--warn)">+14.7% ↑</td>
+          <td><small>⚠️ <strong>Cifra no comparable.</strong> El 61.9% de su gasto estaba en el conjunto afectado. Descontándolo, su CPL real es <strong>$44.64</strong> (124 conversaciones con $5,535).</small></td>
+        </tr>
+        <tr>
+          <td>AEVA MTY_ TOFU_ Interacción/ABO-k</td><td><span class="tag tag-zona">MTY</span></td>
+          <td class="num">$9,243</td><td class="num">290</td>
+          <td class="num" style="color:var(--good)">$31.87</td><td class="num">$38.70</td><td class="num" style="color:var(--good)">-17.6% ↓</td>
+          <td><small>⭐ <strong>La mejor campaña del mes.</strong> Absorbe un 57% más de presupuesto y aun así baja su CPL un 17.6%. Frecuencia sana (2.11×) y 290 conversaciones limpias.</small></td>
+        </tr>
+        <tr>
+          <td>(MOFU+BOFU) RTG_..._0526</td><td><span class="tag tag-rtg">RTG</span></td>
+          <td class="num">$7,650</td><td class="num">134</td>
+          <td class="num" style="color:var(--bad)">$57.09</td><td class="num">$43.62</td><td class="num" style="color:var(--bad)">+30.9% ↑</td>
+          <td><small>⚠️ Se encarece un 30.9% con el mismo presupuesto. Su CTR (0.445%) es el más bajo de la cuenta: <strong>el creativo de retargeting está agotado</strong>.</small></td>
+        </tr>
+        <tr>
+          <td>(SIMILARES) TOFU_..._0726</td><td><span class="tag tag-tofu">TOFU</span></td>
+          <td class="num">$3,598</td><td class="num">91</td>
+          <td class="num" style="color:var(--good)">$39.54</td><td class="num">$49.67</td><td class="num" style="color:var(--good)">-20.4% ↓</td>
+          <td><small>✅ Buena recuperación. Baja un 20.4% escalando un 21% el presupuesto. Los tres conjuntos LAL rinden entre $30.83 y $54.19.</small></td>
+        </tr>
+        <tr>
+          <td>AEVA MTY _MOFU_ Interacción/CBO</td><td><span class="tag tag-rtg">RTG MTY</span></td>
+          <td class="num">$3,035</td><td class="num">42</td>
+          <td class="num" style="color:var(--bad)">$72.27</td><td class="num">$45.74</td><td class="num" style="color:var(--bad)">+58.0% ↑</td>
+          <td><small>🔴 <strong>Lo peor del mes, y van tres meses avisando.</strong> Frecuencia 3.12× sobre un alcance de solo 8,580 personas. Audiencia quemada.</small></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-good">
+    <span class="alert-icon">⭐</span>
+    <div><strong>Monterrey TOFU es el gran acierto de octubre.</strong> Es la única campaña que ha conseguido escalar y mejorar a la vez: <strong>+57% de presupuesto con un CPL un 17.6% más bajo</strong>, y sin tocar nunca el conjunto afectado, así que sus 290 conversaciones a $31.87 son datos totalmente fiables. Sus tres conjuntos funcionan de forma complementaria: <strong>Intereses – Crédito/Préstamo ($26.19)</strong>, <strong>Públicos similares 1% ($34.16)</strong> y <strong>Segmentación Abierta ($38.22)</strong>. Es donde está la capacidad de crecimiento real de la cuenta.</div>
+  </div>
+  <div class="alert alert-bad">
+    <span class="alert-icon">🔴</span>
+    <div><strong>Las dos campañas de retargeting son el problema estructural a resolver en noviembre.</strong> Entre las dos consumen <strong>$10,685 (28.1% del presupuesto) y devuelven 176 conversaciones a $60.71 de media</strong>. El diagnóstico es distinto en cada una: en <strong>RTG ZMG</strong> el problema es el creativo (frecuencia contenida en 1.44×, pero CTR del 0.445%, el más bajo de la cuenta — la gente ya no reacciona al anuncio); en <strong>MTY MOFU</strong> el problema es el tamaño de la audiencia (frecuencia 3.12× sobre 8,580 personas — se les ha mostrado el anuncio más de tres veces a cada una). Son dos arreglos diferentes: creativo nuevo en el primero, ampliar o pausar en el segundo.</div>
+  </div>
+
+  <div class="sub-heading" style="margin-top:24px">4a — Rendimiento por conjunto de anuncios</div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Conjunto de anuncios</th><th>Campaña</th><th class="num">Gasto</th><th class="num">Alcance</th><th class="num">Frec.</th><th class="num">Conv.</th><th class="num">CPL</th><th class="num">CTR</th><th>Estado</th></tr></thead>
+      <tbody>
+        <tr style="background:rgba(245,158,11,0.05)"><td>INTERESES_BROAD_05 v2</td><td><small>SIMPLIFICADA</small></td><td class="num">$8,979</td><td class="num">96,284</td><td class="num">2.08×</td><td class="num">709</td><td class="num" style="color:var(--warn)">$12.66</td><td class="num">5.508%</td><td><small style="color:var(--warn)">Apagado 26 oct</small></td></tr>
+        <tr><td>MOFU_BROAD_BROAD</td><td><small>RTG ZMG</small></td><td class="num">$7,650</td><td class="num">134,676</td><td class="num">1.44×</td><td class="num">134</td><td class="num" style="color:var(--bad)">$57.09</td><td class="num">0.445%</td><td><small style="color:var(--good)">Activo</small></td></tr>
+        <tr style="background:rgba(16,185,129,0.04)"><td>INTERESES_BROAD_02 v2 – nueva</td><td><small>SIMPLIFICADA</small></td><td class="num">$5,182</td><td class="num">35,812</td><td class="num">1.93×</td><td class="num">112</td><td class="num">$46.27</td><td class="num">0.771%</td><td><span class="badge-new">Nuevo 21 oct</span></td></tr>
+        <tr><td>MTY /TOFU/ Intereses – Crédito, Préstamo</td><td><small>MTY TOFU</small></td><td class="num">$3,222</td><td class="num">21,876</td><td class="num">1.67×</td><td class="num">123</td><td class="num" style="color:var(--good)">$26.19</td><td class="num">0.944%</td><td><small style="color:var(--good)">Activo</small></td></tr>
+        <tr><td>MTY /TOFU/ Públicos similares 1%</td><td><small>MTY TOFU</small></td><td class="num">$3,040</td><td class="num">26,872</td><td class="num">1.62×</td><td class="num">89</td><td class="num" style="color:var(--good)">$34.16</td><td class="num">1.056%</td><td><small style="color:var(--good)">Activo</small></td></tr>
+        <tr><td>MTY /TOFU/ Segmentación Abierta</td><td><small>MTY TOFU</small></td><td class="num">$2,981</td><td class="num">22,833</td><td class="num">1.76×</td><td class="num">78</td><td class="num">$38.22</td><td class="num">0.535%</td><td><small style="color:var(--good)">Activo</small></td></tr>
+        <tr><td>TOPMIX_LAL1_BROAD <small>(3 conjuntos + original)</small></td><td><small>SIMILARES</small></td><td class="num">$3,598</td><td class="num">43,159</td><td class="num">1.26×</td><td class="num">91</td><td class="num">$39.54</td><td class="num">0.749%</td><td><small style="color:var(--good)">Activos</small></td></tr>
+        <tr><td>Interactuaron 90 días</td><td><small>MTY MOFU</small></td><td class="num">$1,899</td><td class="num">6,010</td><td class="num">2.35×</td><td class="num">22</td><td class="num" style="color:var(--bad)">$86.33</td><td class="num">0.475%</td><td><small style="color:var(--warn)">Saturado</small></td></tr>
+        <tr><td>Interactuaron 30 días</td><td><small>MTY MOFU</small></td><td class="num">$1,136</td><td class="num">4,704</td><td class="num">2.69×</td><td class="num">20</td><td class="num" style="color:var(--bad)">$56.80</td><td class="num">0.696%</td><td><small style="color:var(--warn)">Saturado</small></td></tr>
+        <tr style="background:rgba(16,185,129,0.04)"><td>INTERESES_BROAD_02 v2 – nueva 2</td><td><small>SIMPLIFICADA</small></td><td class="num">$131</td><td class="num">1,325</td><td class="num">1.18×</td><td class="num">4</td><td class="num">$32.87</td><td class="num">0.895%</td><td><span class="badge-new">Nuevo 26 oct</span></td></tr>
+        <tr style="background:rgba(16,185,129,0.04)"><td>INTERESES_BROAD_02 v2 – nueva 3</td><td><small>SIMPLIFICADA</small></td><td class="num">$105</td><td class="num">1,100</td><td class="num">1.12×</td><td class="num">3</td><td class="num">$35.13</td><td class="num">0.972%</td><td><span class="badge-new">Nuevo 26 oct</span></td></tr>
+        <tr style="background:rgba(245,158,11,0.05)"><td>INTERESES_BROAD_05 v2 "bug??"</td><td><small>SIMPLIFICADA</small></td><td class="num">$116</td><td class="num">1,221</td><td class="num">1.09×</td><td class="num">5</td><td class="num">$23.22</td><td class="num">4.790%</td><td><small style="color:var(--warn)">Prueba · apagado</small></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="alert alert-info">
+    <span class="alert-icon">🧪</span>
+    <div><strong>El conjunto más barato de la cuenta es también el más fiable: Intereses – Crédito/Préstamo de Monterrey, a $26.19.</strong> Y lo consigue con un CTR del 0.944% y una frecuencia de 1.67×, es decir, con margen de sobra para crecer. Es el primer candidato a subir presupuesto en noviembre. En el extremo opuesto, <strong>"Interactuaron 90 días" a $86.33</strong> es el conjunto más caro: 6,010 personas vistas 2.35 veces cada una para 22 conversaciones.</div>
+  </div>
+</section>
+
+<!-- ===== SECCIÓN 05 ===== -->
+<section class="section">
+  <p class="section-title">05</p>
+  <h2 class="section-heading">Segmentación Geográfica</h2>
+  <div class="metric-explain">
+    <strong>¿Qué vemos aquí?</strong> Dónde está aterrizando realmente la inversión y cuál de las dos plazas rinde mejor. Este mes la respuesta cambia respecto a septiembre, y el motivo está en la corrección de medición.
+  </div>
+
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Región</th><th class="num">Gasto MXN</th><th class="num">% del gasto</th><th class="num">CPM</th><th class="num">CTR</th><th>Qué es</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Jalisco</strong></td><td class="num">$27,178</td><td class="num">71.4%</td><td class="num">$50.99</td><td class="num">2.421%</td><td><small>Zona Metropolitana de Guadalajara — mercado principal de AEVA</small></td></tr>
+        <tr><td><strong>Nuevo León</strong></td><td class="num">$10,336</td><td class="num">27.2%</td><td class="num">$80.27</td><td class="num">0.832%</td><td><small>Monterrey — plaza abierta en julio</small></td></tr>
+        <tr><td>Michoacán, Tamaulipas, Veracruz, Coahuila</td><td class="num">$527</td><td class="num">1.4%</td><td class="num">—</td><td class="num">—</td><td><small>Derrame residual del algoritmo en zonas limítrofes</small></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="alert alert-good">
+    <span class="alert-icon">🎯</span>
+    <div><strong>La segmentación sigue limpia: el 98.6% de la inversión cae en Jalisco y Nuevo León</strong>, las dos plazas donde opera AEVA. El 1.4% restante es derrame normal y no merece corrección. Un dato a tener en cuenta: <strong>mostrar el anuncio en Monterrey cuesta un 57% más que en Guadalajara</strong> ($80.27 de CPM frente a $50.99), lo que significa que Monterrey es una plaza más disputada y necesita creativos más eficientes para compensarlo.</div>
+  </div>
+
+  <div class="sub-heading" style="margin-top:24px">5a — Guadalajara frente a Monterrey</div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Territorio</th><th class="num">Gasto MXN</th><th class="num">Conversac.</th><th class="num">CPL oct. (según Meta)</th><th class="num">CPL oct. corregido</th><th class="num">CPL sept.</th><th>Estado</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ZMG / Guadalajara</strong><br><small style="color:var(--muted)">SIMPLIFICADA + RTG ZMG + SIMILARES</small></td><td class="num">$25,762</td><td class="num">1,058</td><td class="num">$24.35</td><td class="num" style="color:var(--warn)"><strong>$48.09</strong></td><td class="num">$22.99</td><td><small style="color:var(--warn)">Afectada por el error de medición</small></td></tr>
+        <tr><td><strong>Monterrey</strong><br><small style="color:var(--muted)">MTY TOFU + MTY MOFU</small></td><td class="num">$12,279</td><td class="num">332</td><td class="num" style="color:var(--good)">$36.98</td><td class="num" style="color:var(--good)"><strong>$36.98</strong></td><td class="num">$40.83</td><td><small style="color:var(--good)">Dato limpio · mejora un 9.4%</small></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="alert alert-mint">
+    <span class="alert-icon">📍</span>
+    <div><strong>Con la medición corregida, Monterrey es ahora la plaza más rentable de la cuenta.</strong> Conseguir una conversación en Monterrey cuesta <strong>$36.98</strong> frente a los <strong>$48.09</strong> de Guadalajara una vez descontado el conjunto afectado — es decir, un <strong>24% más barato</strong>. Esto invierte la lectura de septiembre, cuando Guadalajara parecía la plaza barata ($22.99 frente a $40.83). Y la de Monterrey no es una mejora artificial: <strong>ninguna de las dos campañas de Monterrey tocó el conjunto con el problema de registro</strong>, así que sus 332 conversaciones a $36.98 son datos totalmente fiables, y además son una mejora real del 9.4% sobre septiembre. <strong>Monterrey ha dejado de ser una prueba y se ha convertido en la plaza más sólida de la cuenta.</strong></div>
+  </div>
+  <div class="alert alert-info">
+    <span class="alert-icon">💡</span>
+    <div><strong>Qué hacer con esto en noviembre.</strong> La conclusión no es mover presupuesto de Guadalajara a Monterrey sin más: Guadalajara sigue siendo el mercado natural de AEVA y aporta el 76% de las conversaciones. La conclusión es que <strong>Monterrey tiene margen para crecer y aún no se ha explotado</strong>: su mejor conjunto (Intereses – Crédito/Préstamo) corre a $26.19 con una frecuencia de solo 1.67×, lo que significa que todavía queda audiencia sin impactar. Y en paralelo hay que renovar el creativo de Guadalajara, que es donde está el problema de desgaste (ver sección 08).</div>
+  </div>
+</section>
+
+<!-- ===== SECCIÓN 06 ===== -->
+<section class="section">
+  <p class="section-title">06</p>
+  <h2 class="section-heading">Audiencias y Perfil Demográfico</h2>
+
+  <div class="sub-heading">6a — Por tramo de edad</div>
+  <div class="metric-explain">
+    Mes a mes, el apartado más revelador de la cuenta. El CPL indica cuánto cuesta una conversación en cada tramo: cuanto más bajo, más eficiente. <strong>Este mes damos las dos lecturas</strong> — la que arroja Meta y la corregida sin el conjunto afectado — porque la diferencia cambia la magnitud de la conclusión, aunque no su dirección.
+  </div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Tramo de edad</th><th class="num">Gasto MXN</th><th class="num">% gasto</th><th class="num">Conversac.</th><th class="num">CPL oct.</th><th class="num">CPL corregido</th><th class="num">CPL sept.</th><th class="num">CTR</th></tr></thead>
+      <tbody>
+        <tr><td>18–24 años</td><td class="num">$564</td><td class="num">1.5%</td><td class="num">6</td><td class="num" style="color:var(--bad)">$94.05</td><td class="num">$94.05</td><td class="num">$32.44</td><td class="num">0.687%</td></tr>
+        <tr><td>25–34 años</td><td class="num">$4,499</td><td class="num">11.8%</td><td class="num">125</td><td class="num">$35.99</td><td class="num">$35.99</td><td class="num">$36.86</td><td class="num">0.562%</td></tr>
+        <tr><td>35–44 años</td><td class="num">$10,398</td><td class="num">27.3%</td><td class="num">282</td><td class="num">$36.87</td><td class="num" style="color:var(--bad)">$50.58</td><td class="num">$40.69</td><td class="num">1.093%</td></tr>
+        <tr><td>45–54 años</td><td class="num">$10,614</td><td class="num">27.9%</td><td class="num">346</td><td class="num">$30.68</td><td class="num" style="color:var(--warn)">$45.73</td><td class="num">$33.64</td><td class="num">1.880%</td></tr>
+        <tr style="background:rgba(16,185,129,0.04)"><td>55–64 años</td><td class="num">$6,912</td><td class="num">18.2%</td><td class="num">336</td><td class="num" style="color:var(--good)">$20.57</td><td class="num">$36.55</td><td class="num">$20.19</td><td class="num">3.647%</td></tr>
+        <tr style="background:rgba(16,185,129,0.07)"><td><strong>65+ años</strong> ⭐</td><td class="num">$4,857</td><td class="num">12.8%</td><td class="num">287</td><td class="num" style="color:var(--good)"><strong>$16.92</strong></td><td class="num" style="color:var(--good)"><strong>$26.87</strong></td><td class="num">$11.48</td><td class="num" style="color:var(--good)">5.904%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="alert alert-good">
+    <span class="alert-icon">🎯</span>
+    <div><strong>El público mayor sigue siendo el mejor activo de la cuenta, y la conclusión aguanta incluso con los datos corregidos.</strong> Según Meta, los tramos de 55+ generaron <strong>623 conversaciones (el 44.8% del total) con solo el 30.9% del presupuesto</strong>. Si descontamos el conjunto afectado, la ventaja se reduce pero no desaparece: el 55+ rinde a <strong>$33.95</strong> frente a los <strong>$45.73–50.58</strong> de los tramos 35–54, y el <strong>65+ sigue siendo el tramo más barato de la cuenta ($26.87)</strong> con un CTR muy por encima de la media. Llevamos cuatro meses detectando lo mismo: <strong>los tramos 35–54 se llevan el 55.2% del gasto y son los más caros, mientras el 55+ recibe menos de un tercio y convierte mejor.</strong></div>
+  </div>
+  <div class="alert alert-bad">
+    <span class="alert-icon">🚫</span>
+    <div><strong>El tramo 18–24 debe excluirse.</strong> $564 para 6 conversaciones a <strong>$94.05</strong> — es el tramo más caro de la cuenta y su CPL casi se ha triplicado desde septiembre ($32.44). Tiene sentido de fondo: a los 18–24 años prácticamente nadie es propietario de una vivienda con crédito Infonavit, así que no son el cliente de AEVA. Excluirlo libera presupuesto sin perder nada.</div>
+  </div>
+
+  <div class="sub-heading" style="margin-top:24px">6b — Por género</div>
+  <div class="persona-grid">
+    <div class="persona-card">
+      <div class="persona-rank">51.1%</div>
+      <div class="persona-seg">Mujer</div>
+      <div class="persona-metrics">
+        <div class="pm-label">Gasto</div><div class="pm-val">$19,433 MXN</div>
+        <div class="pm-label">Conversaciones</div><div class="pm-val">763</div>
+        <div class="pm-label">CPL (según Meta)</div><div class="pm-val" style="color:var(--good)">$25.47</div>
+        <div class="pm-label">CPL corregido</div><div class="pm-val">$42.86</div>
+        <div class="pm-label">CTR</div><div class="pm-val">2.574%</div>
+      </div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-rank">47.9%</div>
+      <div class="persona-seg">Hombre</div>
+      <div class="persona-metrics">
+        <div class="pm-label">Gasto</div><div class="pm-val">$18,231 MXN</div>
+        <div class="pm-label">Conversaciones</div><div class="pm-val">617</div>
+        <div class="pm-label">CPL (según Meta)</div><div class="pm-val">$29.55</div>
+        <div class="pm-label">CPL corregido</div><div class="pm-val">$42.55</div>
+        <div class="pm-label">CTR</div><div class="pm-val">1.937%</div>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-warn">
+    <span class="alert-icon">👥</span>
+    <div><strong>Aquí la corrección de medición cambia una conclusión que llevábamos dos meses dando, y conviene decirlo con claridad.</strong> Según las cifras de Meta, las mujeres consiguen conversaciones un 14% más baratas ($25.47 frente a $29.55), igual que en agosto y septiembre. Pero si descontamos el conjunto afectado, <strong>la diferencia desaparece por completo: $42.86 frente a $42.55, un empate técnico</strong> (de hecho, los hombres salen marginalmente más baratos). La ventaja de las mujeres que veníamos reportando era en buena parte un efecto del conjunto de anuncios que contaba de más. <strong>Para noviembre: el reparto 50/50 actual es el correcto y no hay motivo para sesgar el presupuesto por género.</strong> El CTR sí es realmente más alto en mujeres, pero eso no se traduce en conversaciones más baratas.</div>
+  </div>
+</section>
+
+<!-- ===== SECCIÓN 07 ===== -->
+<section class="section">
+  <p class="section-title">07</p>
+  <h2 class="section-heading">Ubicaciones y Frecuencia</h2>
+
+  <div class="sub-heading">7a — Dónde se muestran los anuncios</div>
+  <div class="metric-explain">
+    <strong>¿Qué es el placement?</strong> El sitio concreto donde Meta enseña el anuncio: el muro de Facebook, los Reels, Instagram, el estado de WhatsApp… Cada uno tiene un coste y un rendimiento distinto.
+  </div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Dónde se muestra</th><th class="num">Gasto MXN</th><th class="num">% gasto</th><th class="num">Conversac.</th><th class="num">CPL MXN</th><th class="num">CPM MXN</th><th class="num">CTR</th></tr></thead>
+      <tbody>
+        <tr style="background:rgba(16,185,129,0.04)"><td><strong>Instagram Reels</strong> ⭐</td><td class="num">$2,259</td><td class="num">5.9%</td><td class="num">103</td><td class="num" style="color:var(--good)"><strong>$21.94</strong></td><td class="num">$146.18</td><td class="num">2.704%</td></tr>
+        <tr style="background:rgba(16,185,129,0.04)"><td><strong>Facebook Feed</strong> · el motor</td><td class="num">$23,523</td><td class="num">61.8%</td><td class="num">937</td><td class="num" style="color:var(--good)">$25.10</td><td class="num">$53.96</td><td class="num">2.624%</td></tr>
+        <tr><td>Facebook Reels</td><td class="num">$9,592</td><td class="num">25.2%</td><td class="num">286</td><td class="num">$33.54</td><td class="num">$89.26</td><td class="num">1.237%</td></tr>
+        <tr><td>WhatsApp Estado</td><td class="num">$607</td><td class="num">1.6%</td><td class="num">18</td><td class="num">$33.71</td><td class="num">$8.76</td><td class="num">0.534%</td></tr>
+        <tr><td>Instagram Stories</td><td class="num">$224</td><td class="num">0.6%</td><td class="num">6</td><td class="num">$37.33</td><td class="num">$185.26</td><td class="num">2.316%</td></tr>
+        <tr><td>Anuncios en Facebook Reels</td><td class="num">$357</td><td class="num">0.9%</td><td class="num">9</td><td class="num">$39.62</td><td class="num">$13.96</td><td class="num">0.994%</td></tr>
+        <tr><td>Facebook Stories</td><td class="num">$525</td><td class="num">1.4%</td><td class="num">13</td><td class="num" style="color:var(--warn)">$40.38</td><td class="num">$170.48</td><td class="num">3.020%</td></tr>
+        <tr><td>Instagram Feed</td><td class="num">$451</td><td class="num">1.2%</td><td class="num">6</td><td class="num" style="color:var(--bad)">$75.12</td><td class="num">$122.69</td><td class="num">0.762%</td></tr>
+        <tr><td>Reels in-stream</td><td class="num">$281</td><td class="num">0.7%</td><td class="num">3</td><td class="num" style="color:var(--bad)">$93.57</td><td class="num">$113.65</td><td class="num">1.984%</td></tr>
+        <tr><td>Resto (Audience Network y otros)</td><td class="num">$222</td><td class="num">0.6%</td><td class="num">9</td><td class="num">$24.67</td><td class="num">—</td><td class="num">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="alert alert-good">
+    <span class="alert-icon">📱</span>
+    <div><strong>Instagram Reels repite como el placement más eficiente de la cuenta, y por segundo mes consecutivo está infrafinanciado.</strong> Con solo el <strong>5.9% del presupuesto</strong> consigue el CPL más bajo de todos (<strong>$21.94</strong>), y además es el único sitio donde el gasto ha crecido fuerte este mes (de $992 a $2,259) sin que el coste se deteriore — subió un 128% el presupuesto y el CPL solo pasó de $17.10 a $21.94. <strong>Es la palanca de escalado más clara que tenemos para noviembre.</strong> El Feed de Facebook sigue siendo el motor (61.8% del gasto, 67% de las conversaciones a $25.10) y Facebook Reels aguanta razonablemente a $33.54, aunque con un CPM un 65% más alto que el Feed.</div>
+  </div>
+  <div class="alert alert-warn">
+    <span class="alert-icon">✂️</span>
+    <div><strong>Tres placements que conviene excluir.</strong> <strong>Reels in-stream ($93.57)</strong>, <strong>Instagram Feed ($75.12)</strong> y <strong>Facebook Stories ($40.38 con un CPM de $170.48)</strong> suman $1,257 y solo 22 conversaciones. No aportan volumen y encarecen la media. Excluirlos libera presupuesto para Instagram Reels y el Feed de Facebook sin perder nada.</div>
+  </div>
+  <div class="alert alert-info">
+    <span class="alert-icon">📊</span>
+    <div><strong>Por plataforma</strong>, Facebook concentra el <strong>90.5% de la inversión</strong> ($34,414) y el 90.2% de las conversaciones; Instagram el 7.7% ($2,934) con el 8.3% de las conversaciones; WhatsApp Estado el 1.6% y Audience Network un residual 0.2%. Es decir: <strong>Instagram rinde ligeramente por encima de su peso</strong>, y su mejora viene toda de Reels.</div>
+  </div>
+
+  <div class="sub-heading" style="margin-top:24px">7b — Frecuencia: quién está quemando audiencia</div>
+  <div class="metric-explain">
+    <strong>¿Qué es la frecuencia?</strong> Cuántas veces ve el mismo anuncio una misma persona. Cuando sube demasiado, la gente deja de prestar atención y el coste se dispara. Es el indicador que mejor anticipa los problemas del mes siguiente.
+  </div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Campaña</th><th class="num">Alcance</th><th class="num">Frec. oct.</th><th class="num">Frec. sept.</th><th class="num">CTR oct.</th><th>Estado</th></tr></thead>
+      <tbody>
+        <tr style="background:rgba(239,68,68,0.06)"><td>Monterrey MOFU (retargeting)</td><td class="num">8,580</td><td class="num" style="color:var(--bad)"><strong>3.12×</strong></td><td class="num">3.01×</td><td class="num">0.580%</td><td><small style="color:var(--bad)">🔴 Saturada · tercer mes de aviso</small></td></tr>
+        <tr><td>SIMPLIFICADA</td><td class="num">129,767</td><td class="num" style="color:var(--good)">2.11×</td><td class="num">2.47×</td><td class="num">4.263%</td><td><small style="color:var(--good)">Mejora · los conjuntos nuevos aportan alcance fresco</small></td></tr>
+        <tr><td>Monterrey TOFU</td><td class="num">56,860</td><td class="num">2.11×</td><td class="num">1.94×</td><td class="num">0.848%</td><td><small style="color:var(--muted)">Sube, pero dentro de lo sano</small></td></tr>
+        <tr><td>SIMILARES</td><td class="num">36,492</td><td class="num" style="color:var(--good)">1.49×</td><td class="num">1.90×</td><td class="num">0.749%</td><td><small style="color:var(--good)">Saludable · casi duplica su alcance</small></td></tr>
+        <tr><td>Retargeting ZMG</td><td class="num">134,676</td><td class="num" style="color:var(--good)">1.44×</td><td class="num">2.18×</td><td class="num" style="color:var(--bad)">0.445%</td><td><small style="color:var(--warn)">⚠️ Frecuencia sana pero CTR hundido</small></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="alert alert-bad">
+    <span class="alert-icon">🔔</span>
+    <div><strong>Un aviso que ya no se puede aplazar: Monterrey MOFU.</strong> Es el <strong>tercer mes consecutivo</strong> que aparece en esta tabla como saturada, y la situación ha empeorado: la frecuencia sube de 3.01× a <strong>3.12×</strong> y el alcance se reduce de 11,496 a <strong>8,580 personas</strong>. Es decir, se está mostrando el anuncio más de tres veces a una audiencia cada vez más pequeña, y su CPL ha subido un 58% hasta $72.27. <strong>Las dos salidas son ampliar la ventana de retargeting (de 30/90 días a 180 días) o reducir su presupuesto a la mitad y llevarlo a Monterrey TOFU</strong>, que es donde Monterrey sí está funcionando.</div>
+  </div>
+  <div class="alert alert-warn">
+    <span class="alert-icon">🎨</span>
+    <div><strong>El caso del Retargeting ZMG merece una lectura distinta.</strong> Su frecuencia ha bajado mucho (de 2.18× a 1.44×) y su alcance casi se ha duplicado, así que <strong>no es un problema de audiencia quemada</strong>. Y sin embargo su CTR es el más bajo de toda la cuenta (0.445%) y su CPL ha subido un 30.9%. La explicación es el creativo: <strong>el 92% de su presupuesto corre en vídeo</strong>, y su vídeo principal (ADEUDOS v4) lleva meses rodando. <strong>Es un problema de creativo agotado, no de audiencia — y la solución es creativo nuevo, no más presupuesto.</strong></div>
+  </div>
+</section>
+
+<!-- ===== SECCIÓN 08 — VÍDEO ===== -->
+<section class="section">
+  <p class="section-title">08</p>
+  <h2 class="section-heading">Análisis de Vídeo en Profundidad</h2>
+  <div class="metric-explain">
+    <strong>El apartado clave para producción.</strong> Con el detalle de retención podemos saber no solo qué vídeo convierte más, sino <strong>en qué segundo exacto la gente deja de mirar</strong> — que es la información que necesitamos para escribir los guiones de la siguiente tanda. Y hay una buena noticia: <strong>todas las métricas de retención han mejorado respecto a septiembre</strong>, y las de vídeo no dependen del problema de medición, así que son datos totalmente fiables.
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title"><div class="card-accent"></div>Cómo leer las métricas de vídeo</div>
+    <div style="font-size:12px;color:var(--muted);line-height:1.7">
+      <strong style="color:var(--navy-mint)">Hook Rate</strong> — de cada 100 personas a las que se muestra el vídeo, cuántas se quedan más de 3 segundos. Mide <strong>la fuerza del arranque</strong>.<br>
+      <strong style="color:var(--navy-mint)">Retención 25 / 50 / 75 / 100%</strong> — de los que se quedaron esos 3 segundos, cuántos siguen viendo en cada tramo. Mide <strong>si el guion aguanta</strong>.<br>
+      <strong style="color:var(--navy-mint)">ThruPlay 15s</strong> — cuántos llegan a los 15 segundos. Es la medida más fiable de que el mensaje <strong>se ha entendido de verdad</strong>.<br>
+      <strong style="color:var(--navy-mint)">CPL</strong> — cuánto cuesta cada conversación generada por ese vídeo. Es lo que decide si el vídeo es rentable.
+    </div>
+  </div>
+
+  <div class="sub-heading">8a — El funnel global de vídeo</div>
+  <div class="metric-explain" style="margin-bottom:10px">
+    Calculado <strong>solo sobre las impresiones de los anuncios en vídeo</strong> (311,723 de las 668,392 del mes), que es la forma correcta de medirlo. Los porcentajes de retención están sobre quienes pasaron de 3 segundos, igual que en el reporte de septiembre, así que son directamente comparables.
+  </div>
+  <div class="vfunnel">
+    <div class="vf-row"><div class="vf-lab">Impresiones</div><div class="vf-track"><div class="vf-fill" style="width:100%;background:rgba(127,236,183,0.35);color:var(--text)">311,723</div></div><div class="vf-val" style="color:var(--navy-mint)">100%</div></div>
+    <div class="vf-row"><div class="vf-lab">3 segundos</div><div class="vf-track"><div class="vf-fill" style="width:17.1%;background:var(--navy-mint);min-width:62px">53,379</div></div><div class="vf-val" style="color:var(--navy-mint)">17.1%</div></div>
+    <div class="vf-row"><div class="vf-lab">25% del vídeo</div><div class="vf-track"><div class="vf-fill" style="width:6.2%;background:var(--gold);min-width:58px">19,336</div></div><div class="vf-val" style="color:var(--gold)">6.2%</div></div>
+    <div class="vf-row"><div class="vf-lab">50% del vídeo</div><div class="vf-track"><div class="vf-fill" style="width:3.6%;background:#d98f2b;min-width:54px">11,171</div></div><div class="vf-val" style="color:var(--gold)">3.6%</div></div>
+    <div class="vf-row"><div class="vf-lab">75% del vídeo</div><div class="vf-track"><div class="vf-fill" style="width:2.4%;background:#c4703f;min-width:52px">7,513</div></div><div class="vf-val" style="color:var(--warn)">2.4%</div></div>
+    <div class="vf-row"><div class="vf-lab">95% del vídeo</div><div class="vf-track"><div class="vf-fill" style="width:1.75%;background:rgba(239,68,68,0.75);min-width:50px">5,453</div></div><div class="vf-val" style="color:var(--bad)">1.75%</div></div>
+    <div class="vf-row"><div class="vf-lab">Vídeo completo</div><div class="vf-track"><div class="vf-fill" style="width:1.55%;background:rgba(239,68,68,0.9);min-width:48px">4,825</div></div><div class="vf-val" style="color:var(--bad)">1.55%</div></div>
+  </div>
+
+  <div class="sub-heading" style="margin-top:20px">Retención frente a septiembre — mejora en todos los tramos</div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Tramo</th><th class="num">Octubre</th><th class="num">Septiembre</th><th class="num">Δ</th><th>Qué significa</th></tr></thead>
+      <tbody>
+        <tr><td>Llega al <strong>25%</strong> del vídeo</td><td class="num" style="color:var(--good)">36.2%</td><td class="num">32.5%</td><td class="num" style="color:var(--good)">+3.7 pts</td><td><small>Más gente supera el primer cuarto: los arranques funcionan mejor</small></td></tr>
+        <tr><td>Llega al <strong>50%</strong></td><td class="num" style="color:var(--good)">20.9%</td><td class="num">18.8%</td><td class="num" style="color:var(--good)">+2.1 pts</td><td><small>El cuerpo del guion aguanta algo mejor</small></td></tr>
+        <tr><td>Llega al <strong>75%</strong></td><td class="num" style="color:var(--good)">14.1%</td><td class="num">13.3%</td><td class="num" style="color:var(--good)">+0.8 pts</td><td><small>Mejora ligera</small></td></tr>
+        <tr><td>Ve el <strong>vídeo completo</strong></td><td class="num" style="color:var(--good)">9.0%</td><td class="num">8.5%</td><td class="num" style="color:var(--good)">+0.5 pts</td><td><small>Mejora ligera</small></td></tr>
+        <tr style="background:rgba(16,185,129,0.05)"><td><strong>ThruPlay 15 segundos</strong></td><td class="num" style="color:var(--good)"><strong>29.1%</strong></td><td class="num">25.1%</td><td class="num" style="color:var(--good)"><strong>+4.0 pts</strong></td><td><small style="color:var(--good)">La mejora más relevante: 1 de cada 3,4 que arranca entiende el mensaje</small></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="alert alert-good">
+    <span class="alert-icon">📈</span>
+    <div><strong>La renovación creativa de vídeo está dando resultado.</strong> El ThruPlay a 15 segundos sube <strong>4 puntos (25.1% → 29.1%)</strong> y la retención al primer cuarto sube <strong>3.7 puntos</strong>. Y lo más revelador: si separamos los <strong>26 creativos nuevos lanzados a partir del 21 de octubre</strong> del resto, los nuevos retienen un <strong>34.6% a los 15 segundos frente al 28.2% de los preexistentes</strong>. Es decir, los vídeos producidos con la receta de septiembre retienen un 23% mejor. <strong>La dirección es la correcta y hay que seguir por ahí.</strong></div>
+  </div>
+  <div class="alert alert-warn">
+    <span class="alert-icon">📉</span>
+    <div><strong>Dicho esto, el embudo sigue perdiéndose en el mismo sitio: los primeros segundos.</strong> De cada 100 personas que ven un anuncio en vídeo, <strong>17 se quedan más de 3 segundos</strong>, y de esas solo <strong>36 de cada 100 llegan al primer cuarto</strong>. A partir de ahí la gente aguanta razonablemente (del 75% al final se pierde apenas un 35%). <strong>La conclusión para producción no cambia: el esfuerzo de guion va a los primeros 5 segundos.</strong> Alargar o pulir el final apenas mueve nada.</div>
+  </div>
+
+  <div class="sub-heading" style="margin-top:24px">8b — Vídeo frente a imagen estática</div>
+  <div class="vs-grid">
+    <div class="vs-box" style="background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.25)">
+      <div class="vs-t" style="color:var(--bad)">🎬 Vídeo</div>
+      <div class="vs-n" style="color:var(--bad)">$43.78</div>
+      <div class="vs-s">CPL · <strong>471 conversaciones</strong> con $20,620<br>CTR 0.964% · CPM $66.15<br><strong>54.2% del presupuesto → 33.9% de las conversaciones</strong></div>
+    </div>
+    <div class="vs-box" style="background:rgba(16,185,129,0.07);border-color:rgba(16,185,129,0.3)">
+      <div class="vs-t" style="color:var(--good)">🖼️ Imagen estática</div>
+      <div class="vs-n" style="color:var(--good)">$18.96</div>
+      <div class="vs-s">CPL · <strong>919 conversaciones</strong> con $17,421<br>CTR 3.115% · CPM $48.84<br><strong>45.8% del presupuesto → 66.1% de las conversaciones</strong></div>
+    </div>
+  </div>
+  <div class="alert alert-info">
+    <span class="alert-icon">⚖️</span>
+    <div><strong>Esta comparación hay que matizarla dos veces, y el resultado final sigue siendo el mismo.</strong>
+      <div style="margin-top:8px"><strong>Matiz 1 — el problema de medición favorecía al estático.</strong> El conjunto afectado era casi todo estático. Si lo descontamos, la comparación queda así:</div>
+      <div class="table-wrap" style="margin-top:8px">
+        <table class="data-table">
+          <thead><tr><th>Datos usados</th><th class="num">CPL vídeo</th><th class="num">CPL estático</th><th>Ventaja del estático</th></tr></thead>
+          <tbody>
+            <tr><td>Todo octubre (según Meta)</td><td class="num">$43.78</td><td class="num">$18.96</td><td><small>2.31× más barato</small></td></tr>
+            <tr style="background:rgba(16,185,129,0.04)"><td><strong>Sin el conjunto afectado</strong></td><td class="num">$51.06</td><td class="num">$32.21</td><td><small style="color:var(--good)"><strong>1.59× más barato</strong></small></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:10px"><strong>Matiz 2 — vídeo y estático no corren en los mismos sitios.</strong> Para compararlos bien hay que mirar dónde los dos formatos han competido dentro de la misma campaña:</div>
+      <div class="table-wrap" style="margin-top:8px">
+        <table class="data-table">
+          <thead><tr><th>Campaña</th><th class="num">CPL vídeo</th><th class="num">CPL estático</th><th>Veredicto</th></tr></thead>
+          <tbody>
+            <tr><td>Monterrey TOFU</td><td class="num">$37.22</td><td class="num" style="color:var(--good)">$27.71</td><td><small style="color:var(--good)">Estático gana un 26%</small></td></tr>
+            <tr><td>SIMILARES</td><td class="num">$44.68</td><td class="num" style="color:var(--good)">$36.01</td><td><small style="color:var(--good)">Estático gana un 19%</small></td></tr>
+            <tr><td>SIMPLIFICADA <small>(solo conjuntos limpios)</small></td><td class="num">$54.02</td><td class="num" style="color:var(--good)">$37.64</td><td><small style="color:var(--good)">Estático gana un 30%</small></td></tr>
+            <tr><td>Retargeting ZMG</td><td class="num">$59.02</td><td class="num">$41.73 <small style="color:var(--muted)">(solo 15 conv.)</small></td><td><small style="color:var(--muted)">Poca muestra en estático</small></td></tr>
+            <tr><td>Monterrey MOFU</td><td class="num">$72.27</td><td class="num">—</td><td><small style="color:var(--muted)">Solo vídeo</small></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <strong>En las tres campañas con muestra suficiente, el estático gana entre un 19% y un 30%.</strong> La conclusión de septiembre se confirma con los datos corregidos, aunque la diferencia es menor de lo que parecía. Y hay un matiz importante a favor del vídeo: <strong>es lo único que sostiene el retargeting</strong>, donde aporta 161 de las 176 conversaciones, y es donde se construye el reconocimiento de marca que luego hace que el estático funcione tan bien en captación.
+    </div>
+  </div>
+
+  <div class="sub-heading" style="margin-top:24px">8c — Vídeo a vídeo: qué funciona y qué no</div>
+  <div class="metric-explain">
+    Los vídeos con volumen real del mes. Para cada uno: dónde corrió, cuánto costó cada conversación y el recorrido completo de retención.
+  </div>
+
+  <div class="vcard" style="--accent-color:var(--good)">
+    <div class="vcard-top">
+      <div><div class="vcard-name">Juan Pablo · "En este sector hay inmobiliarias…"</div><div class="vcard-meta">Monterrey TOFU · <strong style="color:var(--good)">el mejor vídeo del mes, por segundo mes consecutivo</strong></div></div>
+      <div class="vcard-kpis">
+        <div class="vk"><div class="vk-l">Gasto</div><div class="vk-v">$1,472</div></div>
+        <div class="vk"><div class="vk-l">Conv.</div><div class="vk-v">40</div></div>
+        <div class="vk"><div class="vk-l">CPL</div><div class="vk-v" style="color:var(--good)">$36.80</div></div>
+        <div class="vk"><div class="vk-l">Hook</div><div class="vk-v" style="color:var(--good)">27.7%</div></div>
+      </div>
+    </div>
+    <div class="vret">
+      <div class="vr-c"><div class="vr-l">25%</div><div class="vr-v" style="color:var(--good)">54.3%</div></div>
+      <div class="vr-c"><div class="vr-l">50%</div><div class="vr-v" style="color:var(--good)">36.8%</div></div>
+      <div class="vr-c"><div class="vr-l">75%</div><div class="vr-v" style="color:var(--good)">32.5%</div></div>
+      <div class="vr-c"><div class="vr-l">100%</div><div class="vr-v" style="color:var(--good)">24.6%</div></div>
+      <div class="vr-c"><div class="vr-l">TP 15s</div><div class="vr-v" style="color:var(--good)">48.7%</div></div>
+    </div>
+    <div class="vcard-read"><strong>Lectura:</strong> repite como referente absoluto y <strong>además mejora</strong> respecto a septiembre (CPL de $45.01 a $36.80, TP15 de 46.5% a 48.7%). Engancha al 27.7%, <strong>casi la mitad llega a los 15 segundos y 1 de cada 4 ve el vídeo entero</strong> — cifras que ningún otro creativo de la cuenta se acerca a tocar. El ángulo de <em>denunciar las malas prácticas del sector</em> genera una curiosidad que aguanta todo el vídeo. <strong>Este es el patrón a replicar, y ya está validado dos meses seguidos.</strong></div>
+  </div>
+
+  <div class="vcard" style="--accent-color:var(--navy-mint)">
+    <div class="vcard-top">
+      <div><div class="vcard-name">Reel Axel · Versión Largo</div><div class="vcard-meta">SIMPLIFICADA · <span class="badge-new">Nuevo 21 oct</span> el mejor estreno del mes en retención</div></div>
+      <div class="vcard-kpis">
+        <div class="vk"><div class="vk-l">Gasto</div><div class="vk-v">$1,618</div></div>
+        <div class="vk"><div class="vk-l">Conv.</div><div class="vk-v">24</div></div>
+        <div class="vk"><div class="vk-l">CPL</div><div class="vk-v" style="color:var(--warn)">$67.43</div></div>
+        <div class="vk"><div class="vk-l">Hook</div><div class="vk-v" style="color:var(--good)">28.6%</div></div>
+      </div>
+    </div>
+    <div class="vret">
+      <div class="vr-c"><div class="vr-l">25%</div><div class="vr-v" style="color:var(--good)">45.2%</div></div>
+      <div class="vr-c"><div class="vr-l">50%</div><div class="vr-v">26.3%</div></div>
+      <div class="vr-c"><div class="vr-l">75%</div><div class="vr-v">22.0%</div></div>
+      <div class="vr-c"><div class="vr-l">100%</div><div class="vr-v">15.6%</div></div>
+      <div class="vr-c"><div class="vr-l">TP 15s</div><div class="vr-v" style="color:var(--good)">38.4%</div></div>
+    </div>
+    <div class="vcard-read"><strong>Lectura:</strong> el <strong>Hook Rate más alto de todos los vídeos con volumen (28.6%)</strong> y un ThruPlay del 38.4%, muy por encima de la media de la cuenta. Pero su CPL es de $67.43, el peor de los vídeos nuevos. La lectura correcta no es descartarlo: <strong>lleva solo 11 días en la cuenta y corre en un conjunto recién creado, todavía en fase de aprendizaje</strong>. Engancha y retiene; lo que falta es que el cierre pida la conversación con más claridad. <strong>Hay que dejarlo correr en noviembre y revisarlo con 30 días de datos.</strong></div>
+  </div>
+
+  <div class="vcard" style="--accent-color:#a78bfa">
+    <div class="vcard-top">
+      <div><div class="vcard-name">v4 · ADEUDOS (vídeo)</div><div class="vcard-meta">Retargeting ZMG · el vídeo con más presupuesto de la cuenta</div></div>
+      <div class="vcard-kpis">
+        <div class="vk"><div class="vk-l">Gasto</div><div class="vk-v">$5,889</div></div>
+        <div class="vk"><div class="vk-l">Conv.</div><div class="vk-v">112</div></div>
+        <div class="vk"><div class="vk-l">CPL</div><div class="vk-v" style="color:var(--warn)">$52.58</div></div>
+        <div class="vk"><div class="vk-l">Hook</div><div class="vk-v">17.9%</div></div>
+      </div>
+    </div>
+    <div class="vret">
+      <div class="vr-c"><div class="vr-l">25%</div><div class="vr-v" style="color:var(--warn)">30.6%</div></div>
+      <div class="vr-c"><div class="vr-l">50%</div><div class="vr-v">17.8%</div></div>
+      <div class="vr-c"><div class="vr-l">75%</div><div class="vr-v">9.7%</div></div>
+      <div class="vr-c"><div class="vr-l">100%</div><div class="vr-v" style="color:var(--bad)">5.9%</div></div>
+      <div class="vr-c"><div class="vr-l">TP 15s</div><div class="vr-v" style="color:var(--warn)">24.4%</div></div>
+    </div>
+    <div class="vcard-read"><strong>Lectura:</strong> se lleva el <strong>15.5% de todo el presupuesto del mes</strong> y su retención es de las peores: solo 6 de cada 100 que arrancan lo terminan. Y además <strong>se ha deteriorado</strong>: en septiembre iba a $43.56 y ahora a $52.58 (+20.7%). Funciona <em>a pesar</em> del vídeo, no gracias a él — está en retargeting, donde la gente ya conoce AEVA. <strong>Es el creativo que explica el CTR hundido del Retargeting ZMG y el primero que hay que sustituir en noviembre.</strong></div>
+  </div>
+
+  <div class="vcard" style="--accent-color:var(--good)">
+    <div class="vcard-top">
+      <div><div class="vcard-name">"¿Quién paga el Infonavit?"</div><div class="vcard-meta">SIMILARES · el mismo vídeo en dos campañas, con resultados opuestos</div></div>
+      <div class="vcard-kpis">
+        <div class="vk"><div class="vk-l">Gasto</div><div class="vk-v">$781</div></div>
+        <div class="vk"><div class="vk-l">Conv.</div><div class="vk-v">24</div></div>
+        <div class="vk"><div class="vk-l">CPL</div><div class="vk-v" style="color:var(--good)">$32.53</div></div>
+        <div class="vk"><div class="vk-l">Hook</div><div class="vk-v">23.8%</div></div>
+      </div>
+    </div>
+    <div class="vret">
+      <div class="vr-c"><div class="vr-l">25%</div><div class="vr-v" style="color:var(--good)">50.9%</div></div>
+      <div class="vr-c"><div class="vr-l">50%</div><div class="vr-v" style="color:var(--good)">31.3%</div></div>
+      <div class="vr-c"><div class="vr-l">75%</div><div class="vr-v" style="color:var(--good)">26.6%</div></div>
+      <div class="vr-c"><div class="vr-l">100%</div><div class="vr-v">18.4%</div></div>
+      <div class="vr-c"><div class="vr-l">TP 15s</div><div class="vr-v" style="color:var(--good)">44.7%</div></div>
+    </div>
+    <div class="vcard-read"><strong>Lectura:</strong> el <strong>vídeo más rentable del mes ($32.53)</strong> y el segundo mejor en retención. Y da una lección valiosa: la misma pieza corriendo en Retargeting ZMG rinde a <strong>$70.07</strong>, más del doble. <strong>El vídeo no es bueno o malo en abstracto — depende de a quién se le muestra.</strong> Este formato de pregunta directa funciona para explicar el trámite a gente que todavía no conoce AEVA, no para recordar a quien ya la conoce. <strong>Acción inmediata: subirle presupuesto dentro de SIMILARES y quitarlo del retargeting.</strong></div>
+  </div>
+
+  <div class="vcard" style="--accent-color:var(--good)">
+    <div class="vcard-top">
+      <div><div class="vcard-name">Testimonio de cliente 2025</div><div class="vcard-meta">SIMILARES · retención muy buena, coste todavía alto</div></div>
+      <div class="vcard-kpis">
+        <div class="vk"><div class="vk-l">Gasto</div><div class="vk-v">$870</div></div>
+        <div class="vk"><div class="vk-l">Conv.</div><div class="vk-v">13</div></div>
+        <div class="vk"><div class="vk-l">CPL</div><div class="vk-v" style="color:var(--warn)">$66.89</div></div>
+        <div class="vk"><div class="vk-l">Hook</div><div class="vk-v" style="color:var(--good)">25.3%</div></div>
+      </div>
+    </div>
+    <div class="vret">
+      <div class="vr-c"><div class="vr-l">25%</div><div class="vr-v" style="color:var(--good)">48.3%</div></div>
+      <div class="vr-c"><div class="vr-l">50%</div><div class="vr-v">28.0%</div></div>
+      <div class="vr-c"><div class="vr-l">75%</div><div class="vr-v">23.3%</div></div>
+      <div class="vr-c"><div class="vr-l">100%</div><div class="vr-v">17.0%</div></div>
+      <div class="vr-c"><div class="vr-l">TP 15s</div><div class="vr-v" style="color:var(--good)">39.6%</div></div>
+    </div>
+    <div class="vcard-read"><strong>Lectura:</strong> el testimonio real engancha y <strong>retiene de forma excelente (39.6% a los 15 segundos)</strong>, pero convierte caro. Es el patrón clásico del testimonio: genera confianza, no urgencia. <strong>La mejora es de cierre, no de arranque</strong> — el vídeo cuenta bien la historia y luego no pide nada concreto. Vale la pena mantenerlo como pieza de apoyo y producir una versión que termine con la pregunta directa que usa "¿Quién paga el Infonavit?".</div>
+  </div>
+
+  <div class="vcard" style="--accent-color:var(--bad)">
+    <div class="vcard-top">
+      <div><div class="vcard-name">Juan Pablo · "Primer cliente de AEVA"</div><div class="vcard-meta">Monterrey MOFU · el vídeo más caro de la cuenta</div></div>
+      <div class="vcard-kpis">
+        <div class="vk"><div class="vk-l">Gasto</div><div class="vk-v">$1,899</div></div>
+        <div class="vk"><div class="vk-l">Conv.</div><div class="vk-v">22</div></div>
+        <div class="vk"><div class="vk-l">CPL</div><div class="vk-v" style="color:var(--bad)">$86.33</div></div>
+        <div class="vk"><div class="vk-l">Hook</div><div class="vk-v">16.5%</div></div>
+      </div>
+    </div>
+    <div class="vret">
+      <div class="vr-c"><div class="vr-l">25%</div><div class="vr-v">44.7%</div></div>
+      <div class="vr-c"><div class="vr-l">50%</div><div class="vr-v">26.2%</div></div>
+      <div class="vr-c"><div class="vr-l">75%</div><div class="vr-v">15.9%</div></div>
+      <div class="vr-c"><div class="vr-l">100%</div><div class="vr-v">8.1%</div></div>
+      <div class="vr-c"><div class="vr-l">TP 15s</div><div class="vr-v" style="color:var(--warn)">25.1%</div></div>
+    </div>
+    <div class="vcard-read"><strong>Lectura:</strong> $1,899 para 22 conversaciones. Su retención al primer cuarto no es mala (44.7%), pero se desploma a partir de ahí y solo el 8% lo termina. El problema real, en todo caso, no es el vídeo: es <strong>la audiencia de Monterrey MOFU, saturada a 3.12× de frecuencia</strong>. Este creativo lleva meses mostrándose a las mismas 8,580 personas. <strong>No hay guion que arregle eso: hay que ampliar la audiencia o bajar el presupuesto.</strong></div>
+  </div>
+
+  <div class="alert alert-warn" style="margin-top:14px">
+    <span class="alert-icon">🧐</span>
+    <div><strong>Un caso que merece atención: "Testimonio Ricardo" (UGC).</strong> Es el vídeo con el <strong>Hook Rate más alto de todo el mes (40.6%)</strong> — más del doble de la media — y un ThruPlay del 33.1%. Y sin embargo: <strong>$561 de gasto y 0 conversaciones</strong>. Enganchó a mucha gente y no le pidió nada. Es la prueba más clara de que <strong>el gancho y la conversión son dos cosas distintas</strong>: un arranque potentísimo con un cierre que no funciona da cero. <strong>Acción: reutilizar sus primeros 3 segundos como arranque de otro vídeo y rehacerle el cierre por completo.</strong></div>
+  </div>
+
+  <div class="sub-heading" style="margin-top:24px">8d — La receta para la siguiente tanda de vídeos</div>
+  <div class="metric-explain">
+    Comparando los vídeos que retienen con los que no, el patrón es consistente mes a mes. Esto es lo que debería guiar los guiones de noviembre.
+  </div>
+  <div class="recipe">
+    <div class="recipe-t">✅ Lo que hacen los vídeos que retienen (TP15 del 38–49%)</div>
+    <div style="font-size:12.5px;color:var(--text);line-height:1.8">
+      <strong>1. Abrir revelando algo que el espectador no sabe</strong>, no recordándole un dolor que ya conoce. "En este sector hay inmobiliarias que…" (48.7% de TP15) frente a "Llevas años cargando con la deuda…" (24.4%). Mismo presentador, mismo formato, el doble de retención.<br><br>
+      <strong>2. Hacer una pregunta concreta y contestable</strong>, con nombre propio del trámite. "¿Quién paga el Infonavit?" retiene un 44.7% porque el espectador quiere saber la respuesta exacta.<br><br>
+      <strong>3. Durar lo que dura el mensaje, no más.</strong> Los vídeos que ganan concentran todo lo importante antes del segundo 15, porque es ahí donde se queda la mitad de la audiencia que va a quedarse.<br><br>
+      <strong>4. Cerrar con una instrucción clarísima.</strong> El caso de "Testimonio Ricardo" (40.6% de hook, 0 conversaciones) demuestra que sin un cierre que pida la conversación, enganchar no sirve de nada. El cierre debe decir qué escribir y qué va a pasar después.<br><br>
+      <strong>5. Mantener el tono de acompañamiento.</strong> Los creativos que mejor convierten explican que AEVA <em>te ayuda a vender</em> y te acompaña en los trámites. Nunca prometer compra directa ni cifras concretas.
+    </div>
+  </div>
+  <div class="alert alert-bad" style="margin-top:12px">
+    <span class="alert-icon">🚫</span>
+    <div><strong>Lo que hay que dejar de hacer.</strong> Abrir recordando la deuda o el problema (los dos vídeos de "Llevas años cargando con la deuda" retienen un 24–28% frente al 48.7% del mejor). Testimonios largos sin cierre. Y sobre todo: <strong>reutilizar el mismo vídeo en retargeting y en captación fría</strong> — "¿Quién paga el Infonavit?" cuesta $32.53 en captación y $70.07 en retargeting. Cada etapa necesita su propio guion.</div>
+  </div>
+</section>
+
+<!-- ===== SECCIÓN 09 ===== -->
+<section class="section">
+  <p class="section-title">09</p>
+  <h2 class="section-heading">Cambios, Pruebas y Estado de la Cuenta</h2>
+  <div class="sub-heading">9a — Qué ha cambiado este mes</div>
+
+  <div class="change-card">
+    <div class="change-dot" style="background:var(--good)"></div>
+    <div class="change-content">
+      <div class="change-label" style="color:var(--good)">21 – 26 OCTUBRE · CORRECCIÓN</div>
+      <div class="change-title">Detección y corrección del error de medición</div>
+      <div class="change-desc">Se aisló el conjunto <strong>INTERESES_BROAD_05 v2</strong>, que duplicaba el registro de inicios de conversación. El 21 de octubre se lanzaron conjuntos limpios en paralelo (<strong>INTERESES_BROAD_02 v2 – nueva</strong>) y un conjunto de diagnóstico; el 26 se apagó el conjunto afectado y se añadieron dos conjuntos limpios más. <strong>El error ha desaparecido de la cuenta.</strong> Detalle completo en la sección 02.</div>
+    </div>
+  </div>
+
+  <div class="change-card">
+    <div class="change-dot" style="background:var(--navy-mint)"></div>
+    <div class="change-content">
+      <div class="change-label" style="color:var(--navy-mint)">21 – 23 OCTUBRE · RENOVACIÓN CREATIVA</div>
+      <div class="change-title">26 creativos nuevos lanzados, con mejor retención que los antiguos</div>
+      <div class="change-desc">Entre el 21 y el 23 de octubre entraron <strong>26 creativos nuevos</strong> ($4,240 de gasto, 94 conversaciones, CPL $45.11). Destacan <strong>Reel Axel Versión Largo</strong> (Hook 28.6%, TP15 38.4%), <strong>v3 WHATSAPP estático</strong> ($29.41 de CPL) y <strong>v4 WHATSAPP estático</strong> ($17.20). En conjunto, los nuevos retienen un <strong>34.6% a los 15 segundos frente al 28.2% de los preexistentes</strong>. Su CPL todavía es alto porque llevan menos de dos semanas activos, en plena fase de aprendizaje.</div>
+    </div>
+  </div>
+
+  <div class="change-card">
+    <div class="change-dot" style="background:var(--gold)"></div>
+    <div class="change-content">
+      <div class="change-label" style="color:var(--gold)">24 – 26 OCTUBRE · ROTACIÓN</div>
+      <div class="change-title">Apagada la tanda de estáticos de julio</div>
+      <div class="change-desc">Entre el 24 y el 26 de octubre pasaron a no entregar <strong>más de quince estáticos de la serie 0726</strong> (BLOCNOTAS, VERDADEROFALSO, URGENCIA, ADEUDOS, PROMESASFALSAS). Eran los que sostenían la SIMPLIFICADA y estaban casi todos en el conjunto afectado. La rotación era necesaria, pero hay que tenerla en cuenta al leer la caída de CTR de la última semana: <strong>parte del descenso es rotación creativa, no deterioro de la cuenta.</strong></div>
+    </div>
+  </div>
+
+  <div class="change-card">
+    <div class="change-dot" style="background:#60a5fa"></div>
+    <div class="change-content">
+      <div class="change-label" style="color:#60a5fa">TODO EL MES · ESCALADO</div>
+      <div class="change-title">Monterrey TOFU pasa de $5,882 a $9,243 sin perder eficiencia</div>
+      <div class="change-desc">Se subió un <strong>57% el presupuesto</strong> de Monterrey TOFU y su CPL <strong>bajó</strong> un 17.6% (de $38.70 a $31.87), con la frecuencia todavía sana en 2.11×. Es la prueba de escalado mejor ejecutada de la cuenta en lo que llevamos de año.</div>
+    </div>
+  </div>
+
+  <div class="sub-heading" style="margin-top:24px">9b — Qué pedíamos en septiembre y qué ha pasado</div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Objetivo fijado para octubre</th><th class="num">Meta</th><th class="num">Resultado</th><th>Veredicto</th></tr></thead>
+      <tbody>
+        <tr><td>Subir el ThruPlay a 15s del vídeo</td><td class="num">&gt; 30%</td><td class="num" style="color:var(--good)">29.1%</td><td><small style="color:var(--good)">✅ Casi · sube 4 puntos desde el 25.1%</small></td></tr>
+        <tr><td>Subir el Hook Rate medio del vídeo</td><td class="num">&gt; 10%</td><td class="num">8.0%</td><td><small style="color:var(--warn)">⚠️ Mejora leve (7.6% → 8.0%) sobre el total de impresiones</small></td></tr>
+        <tr><td>Que el público 55+ supere el 35% del presupuesto</td><td class="num">&gt; 35%</td><td class="num">30.9%</td><td><small style="color:var(--warn)">⚠️ Avanza (28.8% → 30.9%) pero no llega</small></td></tr>
+        <tr><td>Bajar la frecuencia del retargeting de Monterrey</td><td class="num">&lt; 2.5×</td><td class="num" style="color:var(--bad)">3.12×</td><td><small style="color:var(--bad)">❌ No se actuó · tercer mes de aviso</small></td></tr>
+        <tr><td>Reducir el CPL del vídeo</td><td class="num">&lt; $35</td><td class="num">$43.78</td><td><small style="color:var(--warn)">⚠️ Mejora leve desde $45.24</small></td></tr>
+        <tr><td>Mantener la frecuencia de la SIMPLIFICADA</td><td class="num">&lt; 2.5×</td><td class="num" style="color:var(--good)">2.11×</td><td><small style="color:var(--good)">✅ Cumplido · baja desde 2.47×</small></td></tr>
+        <tr><td>Dar más presupuesto a Instagram Reels</td><td class="num">—</td><td class="num" style="color:var(--good)">+128%</td><td><small style="color:var(--good)">✅ De $992 a $2,259 manteniendo el mejor CPL</small></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="alert alert-info">
+    <span class="alert-icon">📋</span>
+    <div><strong>Balance: cuatro de siete objetivos avanzados o cumplidos, y uno pendiente desde agosto.</strong> Lo que se ha ejecutado bien es la renovación creativa, el escalado de Monterrey TOFU y el refuerzo de Instagram Reels. Lo que sigue sin hacerse es <strong>la audiencia del retargeting de Monterrey</strong>, y ya es el tercer mes que aparece en esta tabla: su CPL ha pasado de $31.93 (agosto) a $45.74 (septiembre) a <strong>$72.27 (octubre)</strong>. Es la acción con mayor retorno inmediato y la más sencilla de todas.</div>
+  </div>
+
+  <div class="sub-heading" style="margin-top:24px">9c — Estado de la cuenta al cierre</div>
+  <div class="dest-grid">
+    <div class="dest-card">
+      <div class="dest-card-title"><div class="dest-card-accent" style="background:var(--good)"></div>Conjuntos activos</div>
+      <div class="dest-metrics">
+        <div class="dest-metric-label">Entregando</div><div class="dest-metric-val">13</div>
+        <div class="dest-metric-label">Nuevos este mes</div><div class="dest-metric-val" style="color:var(--navy-mint)">3</div>
+        <div class="dest-metric-label">Apagados en octubre</div><div class="dest-metric-val" style="color:var(--warn)">2</div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-card-title"><div class="dest-card-accent" style="background:var(--gold)"></div>Creativos</div>
+      <div class="dest-metrics">
+        <div class="dest-metric-label">Con gasto en octubre</div><div class="dest-metric-val">103</div>
+        <div class="dest-metric-label">Estrenados desde el 21 oct</div><div class="dest-metric-val" style="color:var(--navy-mint)">26</div>
+        <div class="dest-metric-label">Vídeo / estático (gasto)</div><div class="dest-metric-val">54% / 46%</div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-card-title"><div class="dest-card-accent" style="background:#60a5fa"></div>Medición</div>
+      <div class="dest-metrics">
+        <div class="dest-metric-label">Estado</div><div class="dest-metric-val" style="color:var(--good)">Correcta</div>
+        <div class="dest-metric-label">Conjuntos descartados</div><div class="dest-metric-val">1</div>
+        <div class="dest-metric-label">CPL corregido del mes</div><div class="dest-metric-val" style="color:var(--warn)">$42.68</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECCIÓN 10 ===== -->
+<section class="section">
+  <p class="section-title">10</p>
+  <h2 class="section-heading">Conclusiones del Mes</h2>
+  <div class="metric-explain">
+    Resumen de octubre en cuatro preguntas: qué ha funcionado, qué no, qué haremos en noviembre y cómo mediremos si ha salido bien.
+  </div>
+
+  <div class="steps-grid">
+    <div class="step-card" style="border-color:rgba(16,185,129,0.25)">
+      <div class="step-priority" style="background:rgba(16,185,129,0.12);color:var(--good)">1 · ¿QUÉ HA FUNCIONADO?</div>
+      <div class="step-title">La corrección de la medición, Monterrey TOFU y la renovación de vídeo</div>
+      <ul class="step-list">
+        <li><strong>Se ha detectado y corregido el error de medición.</strong> El activo que duplicaba inicios de conversación está apagado y la cuenta ya mide bien. Es el logro más importante del mes porque todas las decisiones futuras se apoyan en eso.</li>
+        <li><strong>Monterrey TOFU: escalado perfecto.</strong> +57% de presupuesto con el CPL bajando un 17.6% (de $38.70 a $31.87) y la frecuencia en 2.11×. 290 conversaciones con datos totalmente fiables.</li>
+        <li><strong>Monterrey es ahora la plaza más rentable</strong> con los datos corregidos: $36.98 frente a los $48.09 de Guadalajara.</li>
+        <li><strong>Récord de alcance y de CTR:</strong> 366,375 personas únicas (+56.5%) y un CTR del 2.111% (+17.8%). Las dos métricas son independientes del problema de medición.</li>
+        <li><strong>La retención de vídeo mejora en todos los tramos:</strong> ThruPlay 15s del 25.1% al 29.1%, y los 26 creativos nuevos retienen un 34.6% frente al 28.2% de los antiguos.</li>
+        <li><strong>Instagram Reels escala sin romperse:</strong> +128% de presupuesto manteniendo el mejor CPL de la cuenta ($21.94).</li>
+        <li><strong>El público 55+ sigue siendo el mejor activo:</strong> 623 conversaciones (44.8%) con el 30.9% del gasto; el 65+ es el tramo más barato incluso con los datos corregidos ($26.87).</li>
+      </ul>
+    </div>
+
+    <div class="step-card" style="border-color:rgba(239,68,68,0.25)">
+      <div class="step-priority priority-urgent">2 · ¿QUÉ NO HA FUNCIONADO?</div>
+      <div class="step-title">Las dos campañas de retargeting y el creativo de ADEUDOS</div>
+      <ul class="step-list">
+        <li><strong>Monterrey MOFU, tercer mes de aviso sin corregir:</strong> frecuencia de 3.12× sobre solo 8,580 personas y CPL de $72.27 (+58%). Su trayectoria es $31.93 → $45.74 → $72.27.</li>
+        <li><strong>Retargeting ZMG se encarece un 30.9%</strong> hasta $57.09, con el CTR más bajo de la cuenta (0.445%). No es saturación de audiencia (frecuencia 1.44×): es <strong>creativo agotado</strong>.</li>
+        <li><strong>El vídeo ADEUDOS v4 se lleva el 15.5% del presupuesto</strong> y se ha deteriorado un 20.7% ($43.56 → $52.58), con solo un 5.9% de visualizaciones completas.</li>
+        <li><strong>El vídeo sigue rindiendo por debajo del estático</strong> incluso con los datos corregidos: $51.06 frente a $32.21, y pierde en las tres campañas donde los dos compiten.</li>
+        <li><strong>"Testimonio Ricardo": el mejor gancho del mes (Hook 40.6%) con 0 conversaciones</strong> y $561 gastados. Enganchar sin cerrar no sirve.</li>
+        <li><strong>El tramo 18–24 casi triplica su coste</strong> hasta $94.05. No es el cliente de AEVA y sigue recibiendo presupuesto.</li>
+        <li><strong>Se cae una conclusión de los dos meses anteriores:</strong> la supuesta ventaja de las mujeres sobre los hombres era un efecto del conjunto afectado. Con datos limpios, empate técnico ($42.86 vs $42.55).</li>
+      </ul>
+    </div>
+
+    <div class="step-card" style="border-color:rgba(245,158,11,0.25)">
+      <div class="step-priority priority-important">3 · ¿QUÉ ACCIONES TOMAMOS EN NOVIEMBRE?</div>
+      <div class="step-title">Arreglar el retargeting, consolidar la base limpia y escalar lo que ya gana</div>
+      <ul class="step-list">
+        <li><strong>Ampliar la ventana del retargeting de Monterrey</strong> (de 30/90 días a 180 días) o reducirle el presupuesto a la mitad y llevarlo a Monterrey TOFU. <strong>Es la acción más urgente y lleva tres meses pendiente.</strong></li>
+        <li><strong>Sustituir el vídeo ADEUDOS v4 del Retargeting ZMG</strong> por creativo nuevo. Es un solo cambio que afecta al 15.5% del presupuesto.</li>
+        <li><strong>Dejar correr los conjuntos nuevos de la SIMPLIFICADA al menos 14 días</strong> antes de juzgarlos. Hoy van a $44.64 y parte de eso es fase de aprendizaje.</li>
+        <li><strong>Subir presupuesto a Monterrey TOFU</strong>, y en concreto al conjunto Intereses – Crédito/Préstamo ($26.19 de CPL con frecuencia de solo 1.67×). Es el mejor candidato a escalar de toda la cuenta.</li>
+        <li><strong>Seguir subiendo Instagram Reels</strong> ($21.94) y <strong>excluir Reels in-stream ($93.57), Instagram Feed ($75.12) y Facebook Stories ($40.38)</strong>.</li>
+        <li><strong>Excluir el tramo 18–24</strong> y subir presupuesto al 55+ hasta el 35–40%.</li>
+        <li><strong>Producir la nueva tanda de vídeos con la receta de la sección 8d:</strong> arranque que revela algo desconocido, pregunta concreta con el nombre del trámite, todo lo importante antes del segundo 15, y cierre con instrucción clara.</li>
+        <li><strong>Rehacer el cierre de "Testimonio Ricardo"</strong> y reutilizar sus 3 primeros segundos como arranque de otra pieza.</li>
+        <li><strong>Separar los guiones por etapa:</strong> dejar de reutilizar el mismo vídeo en captación y en retargeting. "¿Quién paga el Infonavit?" cuesta $32.53 en captación y $70.07 en retargeting.</li>
+      </ul>
+    </div>
+
+    <div class="step-card" style="border-color:rgba(167,139,250,0.25)">
+      <div class="step-priority priority-mid">4 · ¿QUÉ ESPERAMOS MEJORAR Y CÓMO LO MEDIREMOS?</div>
+      <div class="step-title">Objetivos medibles para noviembre — sobre la base limpia</div>
+      <ul class="step-list">
+        <li><strong>Bajar el CPL de la cuenta por debajo de $38</strong>, partiendo del $42.68 corregido de octubre. Este es el objetivo central del mes y el primero que se mide con datos fiables.</li>
+        <li><strong>Bajar la frecuencia del retargeting de Monterrey por debajo de 2.5×</strong> (hoy 3.12×) y su CPL por debajo de $50 (hoy $72.27).</li>
+        <li><strong>Recuperar el CTR del Retargeting ZMG por encima del 0.8%</strong> (hoy 0.445%) con el creativo nuevo, y su CPL por debajo de $48 (hoy $57.09).</li>
+        <li><strong>Llevar el ThruPlay a 15s por encima del 32%</strong> (hoy 29.1%), tomando como referencia el 48.7% del mejor vídeo.</li>
+        <li><strong>Que el CPL del vídeo baje de $45</strong> sobre datos limpios (hoy $51.06) y se acerque al del estático ($32.21).</li>
+        <li><strong>Que los conjuntos nuevos de la SIMPLIFICADA bajen de $40</strong> (hoy $44.64) una vez salgan de fase de aprendizaje.</li>
+        <li><strong>Que el público 55+ supere el 35% del presupuesto</strong> (hoy 30.9%) sin que su CPL suba.</li>
+        <li><strong>Que Monterrey TOFU mantenga su CPL por debajo de $35</strong> (hoy $31.87) aunque se le suba el presupuesto.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="conclusion-body">
+    <p><strong>Octubre es el mes en el que la cuenta ha empezado a medirse bien.</strong> En volumen es el mejor mes de su historia: 1,390 conversaciones, 366,375 personas alcanzadas (+56.5%) y un CTR del 2.111%, el más alto registrado. Pero el dato que de verdad importa es otro: <strong>hemos localizado el conjunto de anuncios que duplicaba el registro de inicios de conversación, hemos creado conjuntos nuevos y limpios, lo hemos apagado, y el error ha desaparecido de la cuenta.</strong></p>
+    <p>La corrección es sencilla de aplicar: se descarta ese conjunto del cómputo del mes y ya está. Hecho eso, <strong>octubre cierra con 681 conversaciones a $42.68, y esa es la cifra real</strong>, no los $27 del promedio sin corregir ni los $26.52 de septiembre. No es que el rendimiento haya caído: es que durante varios meses hemos estado leyendo cifras mejores de lo que eran. El dato de los últimos cinco días ($49.99) no sirve como referencia, porque ahí se mezclan la medición corregida, los conjuntos nuevos en fase de aprendizaje y la rotación de creativos del 24 al 26.</p>
+    <p>Lo bueno es que <strong>no todo depende de ese ajuste</strong>. El alcance, el CTR y toda la retención de vídeo se miden de forma independiente, y las tres han mejorado. Y hay una campaña que nunca tocó el conjunto afectado y que firma el mejor trabajo del mes: <strong>Monterrey TOFU ha escalado un 57% su presupuesto bajando el CPL un 17.6%</strong>, hasta $31.87. Con los datos corregidos, <strong>Monterrey es hoy la plaza más rentable de la cuenta</strong> ($36.98 frente a $48.09 de Guadalajara) — lo contrario de lo que parecía en septiembre.</p>
+    <p>En vídeo, la renovación está funcionando. El ThruPlay a 15 segundos sube del 25.1% al 29.1%, y los <strong>26 creativos estrenados a partir del 21 de octubre retienen un 34.6% frente al 28.2% de los antiguos</strong>: los guiones escritos con la receta de septiembre aguantan mejor. El referente sigue siendo el mismo y ha mejorado: el vídeo de las <em>malas prácticas del sector</em> retiene un 48.7% a los 15 segundos y convierte a $36.80. Frente a él, el de <em>"llevas años cargando con la deuda"</em> retiene la mitad. <strong>Abrir revelando algo desconocido funciona; abrir recordando un dolor conocido, no.</strong> Y el caso de "Testimonio Ricardo" —el mejor gancho del mes, 40.6%, con cero conversaciones— deja clarísimo que enganchar y convertir son dos trabajos distintos: el gancho se gana en los 3 primeros segundos, la conversación se gana en el cierre.</p>
+    <p>Lo que hay que corregir sin más demora es el <strong>retargeting</strong>, y son dos problemas distintos con dos soluciones distintas. En <strong>Monterrey MOFU</strong> el problema es la audiencia: 3.12× de frecuencia sobre 8,580 personas y un CPL que ha pasado de $31.93 en agosto a $72.27 en octubre. Van tres meses de aviso. En <strong>Retargeting ZMG</strong> el problema es el creativo: frecuencia contenida en 1.44× pero el CTR más bajo de la cuenta (0.445%) y un vídeo principal que lleva meses rodando y se lleva el 15.5% de todo el presupuesto. Entre las dos consumen $10,685 y devuelven conversaciones a $60.71.</p>
+  </div>
+
+  <div class="conclusion-highlight">
+    <div class="conclusion-highlight-title">◆ Los tres focos de noviembre 2026</div>
+    <ul class="foco-list">
+      <li><strong>Foco 1 — Consolidar la base limpia.</strong> Dejar correr los conjuntos nuevos 14 días completos, no tocarlos antes de tiempo, y fijar el objetivo de noviembre en bajar el CPL de la cuenta por debajo de $38 partiendo del $42.68 corregido de octubre. Es el primer mes que vamos a poder medir de verdad si una acción funciona.</li>
+      <li><strong>Foco 2 — Arreglar el retargeting, de una vez.</strong> Ampliar a 180 días la audiencia de Monterrey MOFU (o bajarle el presupuesto a la mitad) y sustituir el vídeo ADEUDOS v4 del Retargeting ZMG. Son dos acciones concretas que afectan al 28% del presupuesto y la primera lleva tres meses pendiente.</li>
+      <li><strong>Foco 3 — Escalar lo que ya gana con datos fiables.</strong> Más presupuesto a Monterrey TOFU (y en particular a Intereses – Crédito/Préstamo, a $26.19 con frecuencia de 1.67×), más a Instagram Reels ($21.94), más al público 55+, y fuera el tramo 18–24 y los tres placements caros.</li>
+    </ul>
+  </div>
+</section>
+
+<footer class="report-footer">
+  <div>
+    <div class="footer-brand">Navy Marketing</div>
+    <div style="margin-top:2px">Reporte generado · Noviembre 2026 · Datos: Octubre 2026</div>
+  </div>
+  <div style="text-align:right">
+    <div>Grupo AEVA Inmobiliaria · Meta Ads</div>
+    <div style="margin-top:2px">Elaborado por Carlos · Navy Marketing</div>
+  </div>
+</footer>
+
+</body>
+</html>
